@@ -63,14 +63,14 @@
           <td>John Doe</td>
           <td>ABC Travels</td>
           <td>New</td>
-          <td><button onclick="deleteLead(this)">Delete</button></td>
+          <button type="button" onclick="deleteLead(this)">Delete</button>
         </tr>
         <tr>
           <td>Mary Smith</td>
           <td>XYZ Corp</td>
           <td>Follow-up</td>
-          <td><button onclick="deleteLead(this)">Delete</button></td>
-        </tr>
+          <button type="button" onclick="deleteLead(this)">Delete</button>
+          </tr>
       </table>
     </div>
 
@@ -96,7 +96,7 @@
       cell2.innerHTML = companyName;
       cell3.innerHTML = leadStatus;
       var cell4 = newRow.insertCell(3);
-      cell4.innerHTML = '<button onclick="deleteLead(this)">Delete</button>';
+      <button type="button" onclick="deleteLead(this)">Delete</button>;
 
       document.getElementById("leadName").value = "";
       document.getElementById("companyName").value = "";
