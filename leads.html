@@ -115,6 +115,19 @@
       var row = button.parentNode.parentNode;
       row.remove();
     }
+    function editLead(button) {
+    var row = button.parentNode.parentNode;
+
+    var name = row.cells[0].innerText;
+    var company = row.cells[1].innerText;
+    var status = row.cells[2].innerText;
+
+    document.getElementById("leadName").value = name;
+    document.getElementById("companyName").value = company;
+    document.getElementById("leadStatus").value = status;
+
+    row.remove();
+  }
   </script>
 
 </body>
