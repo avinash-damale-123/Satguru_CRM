@@ -102,6 +102,10 @@
       document.getElementById("companyName").value = "";
       document.getElementById("leadStatus").value = "";
     }
+      function deleteLead(button) {
+      var row = button.parentNode.parentNode;
+      row.remove();
+      }
   </script>
 
 </body>
