@@ -39,11 +39,11 @@ button,input,select,textarea{font:inherit}
 .sidebar.collapsed .nav-icon{margin-right:0}
 .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .brand-mark{width:46px;height:46px;border-radius:16px;background:linear-gradient(135deg,#0f7b3e,var(--primary-dark));display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 14px 30px rgba(1,118,211,.28)}
-.brand-copy h1{font-size:22px;margin:0 0 4px}.brand-copy p{margin:0;color:#9fb5cf;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.brand-copy h1{font-size:22px;margin:0 0 4px}.brand-copy p{margin:0;color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
 .workspace{background:#ffffff;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px 14px;margin-bottom:18px}
 .workspace small{display:block;color:#9fb5cf;margin-bottom:4px}.workspace strong{display:block;font-size:14px}.workspace span{font-size:12px;color:#d7e3f0}
 .sidebar-section{margin-top:18px}.sidebar-section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#9fb5cf;margin:0 0 10px 12px}
-.nav{display:grid;gap:8px}.nav-link{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;color:#e7eef7;border:1px solid transparent;position:relative}.nav-link:hover{background:rgba(255,255,255,.08)}
+.nav{display:grid;gap:8px}.nav-link{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;color:#374151;border:1px solid transparent;position:relative}.nav-link:hover{background:#eef6f0;}
 .nav-link.active{background:linear-gradient(90deg,rgba(27,150,255,.24),rgba(1,118,211,.16));border-color:rgba(123,193,255,.4)}
 .nav-icon{width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.nav-label{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tooltip{position:absolute;left:72px;top:50%;transform:translateY(-50%);background:#111827;color:#fff;padding:8px 10px;border-radius:10px;font-size:12px;display:none;white-space:nowrap}
