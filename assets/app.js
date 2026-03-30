@@ -20,8 +20,10 @@ const APP = {
   ],
   async init() {
     this.state.currentModule = document.body.dataset.module || 'dashboard';
+    this.state.sidebarCollapsed = localStorage.getItem('crm_sidebar_collapsed') === '1';
     await this.loadData();
     this.bindShell();
+    this.applyShellState();
     this.renderNotifications();
     this.renderModule();
   },
@@ -37,14 +39,24 @@ const APP = {
   bindShell() {
     const toggles = document.querySelectorAll('.js-sidebar-toggle');
     toggles.forEach((toggle)=>toggle.addEventListener('click', ()=>this.toggleSidebar()));
+    this.bindHeaderSearch();
     const bell = document.getElementById('notificationToggle');
     if (bell) bell.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('notificationsOpen');});
+    const settings = document.getElementById('settingsToggle');
+    if (settings) settings.addEventListener('click', ()=>alert('Settings panel will be enabled in the enterprise build.'));
     const profile = document.getElementById('profileToggle');
     if (profile) profile.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('profileOpen');});
     const exportBtn = document.getElementById('exportToggle');
     if (exportBtn) exportBtn.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('exportOpen'); this.renderExportPanel();});
     const full = document.getElementById('fullscreenToggle');
     if (full) full.addEventListener('click', ()=>this.toggleFullScreen());
+    const topCreate = document.querySelector('.top-create-btn');
+    if (topCreate) {
+      topCreate.addEventListener('click', ()=>{
+        if (this.state.currentModule === 'dashboard') return this.openCreateFromHome();
+        this.openCreateDrawer(this.state.currentModule);
+      });
+    }
     document.addEventListener('click', (e)=>{
       if (!e.target.closest('.header-panel-wrap')) this.closePanels();
     });
@@ -63,6 +75,34 @@ const APP = {
     const overlay = document.getElementById('overlay');
     if (overlay) overlay.addEventListener('click', ()=>this.closeDrawers());
   },
+  applyShellState() {
+    const sidebar = document.getElementById('sidebar');
+    const main = document.getElementById('main');
+    if (!sidebar || !main) return;
+    sidebar.classList.toggle('collapsed', this.state.sidebarCollapsed);
+    main.classList.toggle('collapsed', this.state.sidebarCollapsed);
+  },
+  bindHeaderSearch() {
+    const wrap = document.querySelector('.topbar .search-wrap');
+    if (!wrap) return;
+    const input = wrap.querySelector('input');
+    const clear = wrap.querySelector('.clear-search');
+    if (!input || !clear) return;
+    let timer;
+    input.addEventListener('input', ()=>{
+      wrap.classList.toggle('has-value', !!input.value.trim());
+      clearTimeout(timer);
+      timer = setTimeout(()=>{}, 350);
+    });
+    clear.addEventListener('click', ()=>{
+      input.value = '';
+      wrap.classList.remove('has-value');
+      input.focus();
+    });
+  },
+  openCreateFromHome() {
+    window.location.href = 'leads.html';
+  },
   toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const main = document.getElementById('main');
@@ -74,6 +114,7 @@ const APP = {
     this.state.sidebarCollapsed = !this.state.sidebarCollapsed;
     sidebar.classList.toggle('collapsed', this.state.sidebarCollapsed);
     main.classList.toggle('collapsed', this.state.sidebarCollapsed);
+    localStorage.setItem('crm_sidebar_collapsed', this.state.sidebarCollapsed ? '1' : '0');
   },
   togglePanel(key) {
     const all = ['notificationsOpen','profileOpen','exportOpen'];
