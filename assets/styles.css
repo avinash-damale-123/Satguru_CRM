@@ -58,24 +58,10 @@ button,input,select,textarea{font:inherit}
 .sidebar.collapsed .nav-icon{margin-right:0}
 
 .sidebar-header{
-  min-height:84px;
+  min-height:86px;
   display:flex;
-  flex-direction:column;
   align-items:center;
-  gap:8px;
-  width:100%;
-}
-.brand-mark{
-  width:50px;
-  height:50px;
-  border-radius:14px;
-  display:none;
-  align-items:center;
-  padding:10px 8px;
-  border-radius:18px;
-  background:#ffffffd9;
-  border:1px solid #dbe7df;
-  box-shadow:0 8px 24px rgba(15,23,42,.05);
+  padding:8px 6px;
 }
 .brand{
   display:flex;
@@ -90,8 +76,9 @@ button,input,select,textarea{font:inherit}
   display:none;
   align-items:center;
   justify-content:center;
-  border:1px solid var(--line);
-  background:#fff;
+  border:none;
+  background:linear-gradient(135deg,#0f7b3e,#15803d);
+  box-shadow:0 14px 30px rgba(15,123,62,.22);
 }
 .brand-mark img{
   width:36px;
@@ -121,7 +108,7 @@ button,input,select,textarea{font:inherit}
   flex:1;
   text-align:center;
 }
-.brand-copy h1{font-size:20px;margin:4px 0 0;line-height:1.1;color:#0f2a4a}
+.brand-copy h1{font-size:20px;margin:4px 0 0;line-height:1.1;color:#1f2937}
 .sidebar-toggle{
   margin-left:auto;
   width:38px;
@@ -141,7 +128,7 @@ button,input,select,textarea{font:inherit}
   margin-top:10px;
   height:calc(100vh - 124px);
   overflow:auto;
-  border-right:1px solid #d7e3db;
+  border-right:1px solid #dfe7e2;
   padding-right:8px;
   scrollbar-width:thin;
   scrollbar-color:#9aa7a0 #eef4ef;
@@ -154,8 +141,8 @@ button,input,select,textarea{font:inherit}
 .sidebar-modules::-webkit-scrollbar-track{
   background:#eef4ef;
 }
-.sidebar-section{margin-top:6px}
-.sidebar-section + .sidebar-section{margin-top:2px}
+.sidebar-section{margin-top:10px}
+.sidebar-section + .sidebar-section{margin-top:4px}
 .sidebar-section-title{
   font-size:11px;
   text-transform:uppercase;
