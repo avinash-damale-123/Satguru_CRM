@@ -1,0 +1,20 @@
+[
+  {
+    "code": "SAT",
+    "name": "Pune",
+    "city": "Pune",
+    "country": "",
+    "region": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "code": "",
+    "name": "",
+    "city": "",
+    "country": "",
+    "region": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "AC-0001",
+    "name": "Global Services Ltd",
+    "type": "Corporate",
+    "segment": "ERV Top 20%",
+    "owner": "Avinash",
+    "status": "Active",
+    "lastActivity": "2026-03-28"
+  },
+  {
+    "id": "AC-0002",
+    "name": "Satguru Partner Channel",
+    "type": "B2B",
+    "segment": "Agency",
+    "owner": "Super Admin",
+    "status": "Newly Converted",
+    "lastActivity": "2026-03-27"
+  }
+]

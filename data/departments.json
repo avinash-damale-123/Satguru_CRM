@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Finance",
+    "code": "MGMT",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "HR & Admin",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "IT",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Legal & Compliance",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Management",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Marketing",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Operations",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Other",
+    "code": "",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "Vendor & Supplier Management",
+    "code": "MKT",
+    "businessLine": "Satgutu Travel",
+    "status": "Active"
+  },
+  {
+    "name": "",
+    "code": "FIN",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "OPS",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "IT",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "HRA",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "SUP",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "LGL",
+    "businessLine": "",
+    "status": ""
+  },
+  {
+    "name": "",
+    "code": "OTH",
+    "businessLine": "",
+    "status": ""
+  }
+]

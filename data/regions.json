@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Region_1",
+    "code": "RN_1",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_2",
+    "code": "RN_2",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_3",
+    "code": "RN_3",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_4",
+    "code": "RN_4",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_5",
+    "code": "RN_5",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_6",
+    "code": "RN_6",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_7",
+    "code": "RN_7",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_8",
+    "code": "RN_8",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_9",
+    "code": "RN_9",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_10",
+    "code": "RN_10",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_11",
+    "code": "RN_11",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_12",
+    "code": "RN_12",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_13",
+    "code": "RN_13",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_14",
+    "code": "RN_14",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_15",
+    "code": "RN_15",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_16",
+    "code": "RN_16",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_17",
+    "code": "RN_17",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  },
+  {
+    "name": "Region_18",
+    "code": "RN_18",
+    "owner": "Super Admin",
+    "status": "Active",
+    "businessLine": "Satguru Travel"
+  }
+]

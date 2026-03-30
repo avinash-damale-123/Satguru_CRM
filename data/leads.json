@@ -1,0 +1,35 @@
+[
+  {
+    "id": "LD-0001",
+    "name": "ABC Travels",
+    "category": "Corporate",
+    "segment": "NCA Corporate",
+    "stage": "Qualified",
+    "owner": "Avinash",
+    "source": "Referral",
+    "nextAction": "2026-04-02",
+    "status": "Active"
+  },
+  {
+    "id": "LD-0002",
+    "name": "Global Services Ltd",
+    "category": "Corporate",
+    "segment": "ERV Top 20%",
+    "stage": "Pending Decision",
+    "owner": "Branch Sales",
+    "source": "Direct",
+    "nextAction": "2026-04-03",
+    "status": "Active"
+  },
+  {
+    "id": "LD-0003",
+    "name": "Sky Agent Network",
+    "category": "B2B",
+    "segment": "Agency",
+    "stage": "Contacted",
+    "owner": "Coordinator",
+    "source": "Digital",
+    "nextAction": "2026-04-04",
+    "status": "Active"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "CT-0001",
+    "name": "Rahul Sharma",
+    "designation": "Travel Manager",
+    "email": "rahul@abctravels.com",
+    "phone": "9876543210",
+    "linkedTo": "Lead",
+    "linkedName": "ABC Travels"
+  },
+  {
+    "id": "CT-0002",
+    "name": "Priya Mehta",
+    "designation": "Procurement Head",
+    "email": "priya@globalservices.com",
+    "phone": "9123456780",
+    "linkedTo": "Account",
+    "linkedName": "Global Services Ltd"
+  }
+]
