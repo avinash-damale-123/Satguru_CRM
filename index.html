@@ -6,102 +6,136 @@
   <title>Satguru CRM Login</title>
   <link rel="stylesheet" href="assets/styles.css" />
   <style>
-  body{
-    min-height:100vh;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(135deg,#f7faf8,#eaf6ef 55%,#fff4ea);
-  }
-  .login-shell{
-    width:min(1120px,94vw);
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    background:#ffffff;
-    border:1px solid #dfe7e2;
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:0 30px 70px rgba(15,23,42,.10);
-  }
-  .login-left{
-    padding:52px;
-    color:#ffffff;
-    background:linear-gradient(180deg,#0f7b3e,#0b5f30);
-  }
-  .login-left h1{
-    font-size:42px;
-    margin:0 0 16px;
-  }
-  .login-left p{
-    font-size:18px;
-    line-height:1.65;
-    color:#eaf6ef;
-    margin:0 0 28px;
-  }
-  .feature{
-    padding:16px 18px;
-    border-radius:18px;
-    background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.18);
-    margin-bottom:14px;
-  }
-  .feature strong{
-    display:block;
-    margin-bottom:4px;
-  }
-  .login-right{
-    background:#ffffff;
-    padding:44px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .login-card{
-    width:min(420px,100%);
-  }
-  .login-card h2{
-    font-size:32px;
-    margin:0 0 8px;
-  }
-  .login-card p{
-    margin:0 0 24px;
-    color:var(--muted);
-  }
-  .login-card .form-group{
-    margin-bottom:16px;
-  }
-  .login-card .primary-btn{
-    width:100%;
-  }
-  .small-note{
-    margin-top:14px;
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-  }
-  @media (max-width:900px){
-    .login-shell{grid-template-columns:1fr}
-    .login-left,.login-right{padding:28px}
-  }
-</style>
+    body{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#f7faf8,#eaf6ef 55%,#fff4ea);
+    }
+    .login-shell{
+      width:min(1120px,94vw);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      background:#ffffff;
+      border:1px solid #dfe7e2;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 20px 50px rgba(15,23,42,.08);
+    }
+    .login-left{
+      padding:52px;
+      color:#ffffff;
+      background:linear-gradient(180deg,#0f7b3e,#0b5f30);
+    }
+    .login-left h1{
+      font-size:42px;
+      margin:0 0 16px;
+    }
+    .login-left p{
+      font-size:18px;
+      line-height:1.65;
+      color:#eaf6ef;
+      margin:0 0 28px;
+    }
+    .feature{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      margin-bottom:14px;
+    }
+    .feature strong{
+      display:block;
+      margin-bottom:4px;
+    }
+    .login-right{
+      background:#ffffff;
+      padding:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .login-card{
+      width:min(420px,100%);
+    }
+    .login-card h2{
+      font-size:32px;
+      margin:0 0 8px;
+    }
+    .login-card p{
+      margin:0 0 24px;
+      color:var(--muted);
+    }
+    .login-card .form-group{
+      margin-bottom:16px;
+    }
+    .login-card .primary-btn{
+      width:100%;
+    }
+    .small-note{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+    @media (max-width:900px){
+      .login-shell{grid-template-columns:1fr}
+      .login-left,.login-right{padding:28px}
+    }
+  </style>
 </head>
 <body>
   <div class="login-shell">
     <section class="login-left">
-      <div class="brand" style="margin-bottom:20px"><div class="brand-mark">SG</div><div class="brand-copy"><h1>Satguru CRM</h1><p>Sales Process Compliance Platform</p></div></div>
-      <p>The new CRM is designed as a structured system of record for leads, accounts, contacts, activities, compliance, governance, and management reporting across branches and central teams.</p>
-      <div class="feature"><strong>Pipeline & Conversion Discipline</strong><span>Single structure for corporate, retail, and B2B lead capture with controlled lead-to-account conversion.</span></div>
-      <div class="feature"><strong>Compliance by Design</strong><span>Meeting logs, next actions, overdue follow-up tracking, and accountable ownership stay visible.</span></div>
-      <div class="feature"><strong>Masters & Governance</strong><span>Business line, region, country, branch, department, user, and role standards are centralized.</span></div>
+      <div class="brand" style="margin-bottom:20px">
+        <div class="brand-mark">SG</div>
+        <div class="brand-copy">
+          <h1>Satguru CRM</h1>
+          <p>Sales Process Compliance Platform</p>
+        </div>
+      </div>
+
+      <p>
+        The new CRM is designed as a structured system of record for leads, accounts,
+        contacts, activities, compliance, governance, and management reporting across
+        branches and central teams.
+      </p>
+
+      <div class="feature">
+        <strong>Pipeline & Conversion Discipline</strong>
+        <span>Single structure for corporate, retail, and B2B lead capture with controlled lead-to-account conversion.</span>
+      </div>
+
+      <div class="feature">
+        <strong>Compliance by Design</strong>
+        <span>Meeting logs, next actions, overdue follow-up tracking, and accountable ownership stay visible.</span>
+      </div>
+
+      <div class="feature">
+        <strong>Masters & Governance</strong>
+        <span>Business line, region, country, branch, department, user, and role standards are centralized.</span>
+      </div>
     </section>
+
     <section class="login-right">
       <div class="login-card">
         <h2>Welcome Back</h2>
         <p>Sign in to access your CRM workspace.</p>
+
         <form action="home.html">
-          <div class="form-group"><label>Email Address <span class="required">*</span></label><input class="input" type="email" value="admin@satguru.com" required /></div>
-          <div class="form-group"><label>Password <span class="required">*</span></label><input class="input" type="password" value="password" required /></div>
+          <div class="form-group">
+            <label>Email Address <span class="required">*</span></label>
+            <input class="input" type="email" value="admin@satguru.com" required />
+          </div>
+
+          <div class="form-group">
+            <label>Password <span class="required">*</span></label>
+            <input class="input" type="password" value="password" required />
+          </div>
+
           <button class="primary-btn" type="submit">Login to CRM</button>
         </form>
+
         <div class="small-note">Prototype aligned to uploaded blueprint and CRM UI standards</div>
       </div>
     </section>
