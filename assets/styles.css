@@ -44,11 +44,10 @@ button,input,select,textarea{font:inherit}
   width:var(--sidebar-width);
   background:#f3f8f4;
   color:#1f2937;
-  padding:18px 14px;
-  overflow:auto;
+  padding:14px 12px 16px;
+  overflow:hidden;
   transition:width .2s ease, transform .2s ease;
   z-index:40;
-  border-right:1px solid #dfe7e2;
 }
 .sidebar.collapsed{width:var(--sidebar-collapsed)}
 .sidebar.collapsed .brand-copy,
@@ -58,27 +57,42 @@ button,input,select,textarea{font:inherit}
 .sidebar.collapsed .nav-link{justify-content:center}
 .sidebar.collapsed .nav-icon{margin-right:0}
 
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.brand-mark{
-  width:46px;
-  height:46px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#0f7b3e,#15803d);
+.sidebar-header{
+  min-height:86px;
   display:flex;
   align-items:center;
-  justify-content:center;
+  padding:8px 6px;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+}
+.brand-logo{
+  width:152px;
+  max-width:100%;
+  height:42px;
+  object-fit:contain;
+  display:block;
+}
+.brand-logo-fallback{
+  display:none;
+  font-size:26px;
+  line-height:1;
   font-weight:800;
-  color:#fff;
-  box-shadow:0 14px 30px rgba(15,123,62,.22);
+  letter-spacing:.01em;
+  color:#0f7b3e;
 }
-.brand-copy h1{font-size:22px;margin:0 0 4px}
-.brand-copy p{
-  margin:0;
-  color:#6b7280;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
+.brand-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  text-align:center;
 }
+.brand-copy h1{font-size:20px;margin:4px 0 0;line-height:1.1;color:#1f2937}
 .sidebar-toggle{
   margin-left:auto;
   width:38px;
@@ -90,7 +104,28 @@ button,input,select,textarea{font:inherit}
   color:#1f2937;
 }
 .sidebar.collapsed .sidebar-toggle{margin-left:0}
+.sidebar.collapsed .brand-copy{display:none}
+.sidebar.collapsed .sidebar-header{justify-content:center}
+
+.sidebar-modules{
+  margin-top:10px;
+  height:calc(100vh - 124px);
+  overflow:auto;
+  border-right:1px solid #dfe7e2;
+  padding-right:8px;
+  scrollbar-width:thin;
+  scrollbar-color:#9aa7a0 #eef4ef;
+}
+.sidebar-modules::-webkit-scrollbar{width:8px}
+.sidebar-modules::-webkit-scrollbar-thumb{
+  background:#9aa7a0;
+  border-radius:10px;
+}
+.sidebar-modules::-webkit-scrollbar-track{
+  background:#eef4ef;
+}
 .sidebar-section{margin-top:10px}
+.sidebar-section + .sidebar-section{margin-top:4px}
 .sidebar-section-title{
   font-size:11px;
   text-transform:uppercase;
@@ -702,6 +737,9 @@ tr:hover td{background:#fbfdff}
 @media (max-width:860px){
   .sidebar{position:fixed;transform:translateX(-100%)}
   .sidebar.mobile-open{transform:translateX(0)}
+  .sidebar-modules{
+    height:calc(100vh - 134px);
+  }
   .main,.main.collapsed{
     margin-left:0;
     width:100%;
@@ -730,8 +768,9 @@ tr:hover td{background:#fbfdff}
   }
 }
 @media (max-width:640px){
-  .sidebar{padding:14px 12px}
-  .brand-copy h1{font-size:20px}
+  .sidebar{padding:10px}
+  .brand-copy h1{font-size:18px}
+  .brand-logo{width:132px;height:36px}
   .topbar{padding:12px}
   .page{padding:16px}
   .card,.kpi-card,.data-card{border-radius:14px}
@@ -752,7 +791,6 @@ tr:hover td{background:#fbfdff}
 }
 @media (max-width:420px){
   .brand{gap:8px}
-  .brand-mark{width:40px;height:40px;border-radius:13px}
   .sidebar-toggle{width:34px;height:34px}
   .topbar-title h2{font-size:20px}
   .topbar-title p{font-size:12px}

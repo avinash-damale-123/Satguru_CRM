@@ -1,15 +1,16 @@
-<svg width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="1" y="1" width="258" height="70" rx="14" fill="white" stroke="#dfe7e2"/>
-  <circle cx="36" cy="36" r="22" fill="url(#g)"/>
-  <path d="M28 39c4 5 12 5 16 0" stroke="white" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="31" cy="31" r="2.5" fill="white"/>
-  <circle cx="41" cy="31" r="2.5" fill="white"/>
-  <text x="66" y="31" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#0f7b3e">Satguru Travel</text>
-  <text x="66" y="50" font-family="Inter, Arial, sans-serif" font-size="13" fill="#6b7280">CRM Platform</text>
+<svg width="220" height="64" viewBox="0 0 220 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="g" x1="14" y1="14" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+    <linearGradient id="globe" x1="13" y1="8" x2="41" y2="36" gradientUnits="userSpaceOnUse">
       <stop stop-color="#0f7b3e"/>
-      <stop offset="1" stop-color="#15803d"/>
+      <stop offset="1" stop-color="#8ccfc0"/>
     </linearGradient>
   </defs>
+  <circle cx="28" cy="24" r="16" fill="url(#globe)"/>
+  <path d="M15 14c3-7 20-9 27 2" stroke="#e97824" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M40 33c-5 6-18 6-23 0" stroke="#e97824" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M27 38c8-7 16 6 8 12-10 7-23-5-10-14" stroke="#e97824" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+  <text x="53" y="34" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f7b3e">sat</text>
+  <text x="100" y="38" font-family="Inter, Arial, sans-serif" font-size="35" font-weight="500" fill="#e97824">g</text>
+  <text x="124" y="34" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f7b3e">uru</text>
+  <text x="54" y="54" font-family="Inter, Arial, sans-serif" font-size="10" letter-spacing="2.8" fill="#334155">TRAVEL</text>
 </svg>
