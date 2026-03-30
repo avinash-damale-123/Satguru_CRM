@@ -1,25 +1,101 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Dashboard - Satguru CRM</title><link rel="stylesheet" href="assets/styles.css"/></head><body data-module="dashboard"> 
-<div class="app"> 
-<aside class="sidebar" id="sidebar">
-  <div class="brand"><div class="brand-mark">SG</div><div class="brand-copy"><h1>Satguru CRM</h1><p>Main Workspace</p></div></div>
-  <div class="workspace"><small>Workspace</small><strong>CRM & Sales Compliance</strong><span>Production-ready frontend shell</span></div>
-  <div class="sidebar-section"><div class="sidebar-section-title">Overview</div><nav class="nav"><a class="nav-link active" href="home.html"><span class="nav-icon">🏠</span><span class="nav-label">Dashboard</span><span class="tooltip">Dashboard</span></a></nav></div>
-  <div class="sidebar-section"><div class="sidebar-section-title">Core Modules</div><nav class="nav"><a class="nav-link" href="leads.html"><span class="nav-icon">📊</span><span class="nav-label">Leads</span><span class="tooltip">Leads</span></a><a class="nav-link" href="accounts.html"><span class="nav-icon">🏢</span><span class="nav-label">Accounts</span><span class="tooltip">Accounts</span></a><a class="nav-link" href="contacts.html"><span class="nav-icon">👤</span><span class="nav-label">Contacts</span><span class="tooltip">Contacts</span></a><a class="nav-link" href="users.html"><span class="nav-icon">🧑‍💼</span><span class="nav-label">Users</span><span class="tooltip">Users</span></a><a class="nav-link" href="masters.html"><span class="nav-icon">🧭</span><span class="nav-label">Masters</span><span class="tooltip">Masters</span></a></nav></div>
-  <div class="sidebar-footer"><div class="footer-user"><div class="avatar">A</div><div class="footer-user-copy"><strong>Avinash</strong><span>Super Admin</span></div></div><a href="index.html"><button class="logout">Sign Out</button></a></div>
-</aside>
-<main class="main" id="main">
-  <header class="topbar">
-    <div class="topbar-left"><button class="icon-btn" id="sidebarToggle">☰</button><div class="topbar-title"><h2>Dashboard</h2><p>Executive overview, compliance visibility, and quick actions</p></div></div>
-    <div class="topbar-right">
-      <div class="search-wrap"><span class="left">🔎</span><input type="text" placeholder="Search leads, accounts, contacts..."/><button class="clear-search">×</button></div>
-      <button class="primary-btn">+ Create New</button>
-      <div class="header-panel-wrap" style="position:relative"><button class="icon-btn" id="exportToggle">⭳</button><div class="dropdown-panel" id="exportPanel"><div class="panel-header"><strong>Export</strong><button class="icon-btn" style="width:34px;height:34px" onclick="APP.closePanels()">✕</button></div><div class="panel-body" id="exportBody"></div></div></div>
-      <button class="icon-btn" id="fullscreenToggle"><span id="fullscreenIcon">⛶</span></button>
-      <div class="header-panel-wrap" style="position:relative"><button class="icon-btn" id="notificationToggle">🔔<span class="badge-count" id="notificationBadge"></span></button><div class="dropdown-panel" id="notificationPanel"><div class="panel-header"><strong>Notifications</strong><button class="icon-btn" style="width:34px;height:34px" onclick="APP.closePanels()">✕</button></div><div class="panel-body" id="notificationBody"></div></div></div>
-      <div class="header-panel-wrap" style="position:relative"><div class="profile-trigger" id="profileToggle"><div class="avatar">A</div><div class="profile-copy"><strong>Avinash</strong><span>Super Admin</span></div><div>▾</div></div><div class="dropdown-panel" id="profilePanel"><div class="panel-header"><strong>User Profile</strong><button class="icon-btn" style="width:34px;height:34px" onclick="APP.closePanels()">✕</button></div><div class="panel-body"><div style="display:flex;gap:12px;align-items:center;margin-bottom:14px"><div class="avatar" style="width:56px;height:56px">A</div><div><strong>Avinash</strong><div class="status-note">Super Admin</div><div class="status-note">admin@satguru.com</div></div></div><button class="ghost-btn" style="width:100%;margin-bottom:10px" onclick="window.location.href='users.html'">View Profile</button><button class="danger-btn" style="width:100%" onclick="window.location.href='index.html'">Sign Out</button></div></div></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Satguru CRM</title>
+  <link rel="stylesheet" href="assets/crm-ui.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand-block">
+      <div class="brand-mark">SG</div>
+      <div class="brand-copy">
+        <h1>Satguru CRM</h1>
+        <p>Main Workspace</p>
+      </div>
     </div>
-  </header>
-  <div class="page" id="pageRoot"></div>
-</main></div>
-<div class="overlay" id="overlay"></div><div class="drawer" id="drawer"></div>
-<script src="assets/app.js"></script></body></html>
+
+    <div class="nav-group">
+      <div class="nav-title">Overview</div>
+      <ul class="nav-list">
+        <li>
+          <a href="home.html" class="nav-link active">
+            <span class="nav-icon">🏠</span>
+            Dashboard
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Sales</div>
+      <ul class="nav-list">
+        <li><a href="leads.html" class="nav-link">📊 Leads</a></li>
+        <li><a href="accounts.html" class="nav-link">🏢 Accounts</a></li>
+        <li><a href="contacts.html" class="nav-link">👤 Contacts</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">Admin</div>
+      <ul class="nav-list">
+        <li><a href="users.html" class="nav-link">🧑‍💼 Users</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header -->
+    <div class="topbar">
+      <div class="page-heading">
+        <h2>Dashboard</h2>
+        <p>Welcome to your CRM</p>
+      </div>
+
+      <div class="topbar-right">
+        <input class="input" placeholder="Search..." />
+        <button class="primary-btn">+ New Lead</button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-body">
+
+      <div class="stats-grid">
+        <div class="card">
+          <div class="stat-label">Total Leads</div>
+          <div class="stat-value">128</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-label">Accounts</div>
+          <div class="stat-value">52</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-label">Users</div>
+          <div class="stat-value">14</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-label">Follow-ups</div>
+          <div class="stat-value">21</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script src="assets/crm-ui.js"></script>
+</body>
+</html>
