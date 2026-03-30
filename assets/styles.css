@@ -664,6 +664,9 @@ tr:hover td{background:#fbfdff}
   .top-create-btn{margin-left:auto}
   .mobile-sidebar-toggle{display:flex}
   .profile-trigger{min-width:150px}
+  .topbar-right{width:100%}
+  .mobile-sidebar-toggle{display:flex}
+  .profile-trigger{min-width:58px}
 }
 @media (max-width:640px){
   .page{padding:18px}
