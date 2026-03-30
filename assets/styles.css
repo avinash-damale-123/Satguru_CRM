@@ -234,6 +234,7 @@ button,input,select,textarea{font:inherit}
   cursor:pointer;
   position:relative;
 }
+.mobile-sidebar-toggle{display:none}
 .topbar-title h2{margin:0;font-size:24px}
 .topbar-title p{margin:4px 0 0;color:var(--muted);font-size:14px}
 
@@ -677,6 +678,7 @@ tr:hover td{background:#fbfdff}
   .search-wrap{min-width:100%}
   .topbar{align-items:flex-start;flex-direction:column}
   .topbar-right{width:100%}
+  .mobile-sidebar-toggle{display:flex}
   .profile-trigger{min-width:58px}
 }
 @media (max-width:640px){

@@ -35,8 +35,8 @@ const APP = {
     this.state.data = Object.fromEntries(entries);
   },
   bindShell() {
-    const toggle = document.getElementById('sidebarToggle');
-    if (toggle) toggle.addEventListener('click', ()=>this.toggleSidebar());
+    const toggles = document.querySelectorAll('.js-sidebar-toggle');
+    toggles.forEach((toggle)=>toggle.addEventListener('click', ()=>this.toggleSidebar()));
     const bell = document.getElementById('notificationToggle');
     if (bell) bell.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('notificationsOpen');});
     const profile = document.getElementById('profileToggle');
@@ -250,7 +250,6 @@ const APP = {
     const users = (this.state.data.users || []).filter(u=>u.name);
     const contacts = this.state.data.contacts || [];
     root.innerHTML = `
-      <div class="info-banner">This CRM shell follows the uploaded standards for sidebar, search, footer ranges, pagination, notifications, export, create/read/edit patterns, and profile behavior.</div>
       <div class="kpi-grid">
         <div class="card"><div class="kpi-label">Open Leads</div><div class="kpi-value">${leads.length}</div><div class="kpi-foot">Single structure for corporate, B2B, and retail prospects</div></div>
         <div class="card"><div class="kpi-label">Active Accounts</div><div class="kpi-value">${accounts.length}</div><div class="kpi-foot">Post-conversion relationship entities</div></div>
