@@ -152,7 +152,7 @@
   <script>
     const SUPER_ADMIN = { email: 'superadmin@satguru.com', password: 'Satguru@123' };
     const LEGACY_ADMIN_EMAIL = 'admin@satguru.com';
-    const state = { resetCode: '', resetUser: '' };
+    const state = { resetCode: '', resetUser: '', tempPassword: '' };
 
     const loginCard = document.getElementById('loginCard');
     const forgotCard = document.getElementById('forgotCard');
@@ -200,6 +200,7 @@
       resetPasswordForm.reset();
       state.resetCode = '';
       state.resetUser = '';
+      state.tempPassword = '';
       loginEmail.focus();
     }
 
@@ -278,8 +279,13 @@
 
       state.resetUser = email;
       state.resetCode = '123456';
+      state.tempPassword = `Tmp@${Math.floor(1000 + Math.random() * 9000)}`;
       resetPasswordForm.classList.remove('hidden');
-      showStatus(forgotStatus, 'success', 'Reset code sent successfully. Use demo code 123456 to continue.');
+      showStatus(
+        forgotStatus,
+        'success',
+        `Password reset link has been sent from crm.marketing@satgurutravel.com with temporary password ${state.tempPassword}. Demo reset code: 123456.`
+      );
       resetCode.focus();
     });
 
