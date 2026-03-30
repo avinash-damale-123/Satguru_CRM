@@ -5,6 +5,7 @@ const APP = {
     notificationsOpen: false,
     profileOpen: false,
     exportOpen: false,
+    createOpen: false,
     fullScreen: false,
     drawers: {},
     data: {},
@@ -20,6 +21,7 @@ const APP = {
   ],
   async init() {
     this.state.currentModule = document.body.dataset.module || 'dashboard';
+    this.setupTopbarOptionOne();
     await this.loadData();
     this.bindShell();
     this.renderNotifications();
@@ -43,6 +45,8 @@ const APP = {
     if (profile) profile.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('profileOpen');});
     const exportBtn = document.getElementById('exportToggle');
     if (exportBtn) exportBtn.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('exportOpen'); this.renderExportPanel();});
+    const createBtn = document.getElementById('createToggle');
+    if (createBtn) createBtn.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('createOpen'); this.renderCreatePanel();});
     const full = document.getElementById('fullscreenToggle');
     if (full) full.addEventListener('click', ()=>this.toggleFullScreen());
     document.addEventListener('click', (e)=>{
@@ -76,14 +80,14 @@ const APP = {
     main.classList.toggle('collapsed', this.state.sidebarCollapsed);
   },
   togglePanel(key) {
-    const all = ['notificationsOpen','profileOpen','exportOpen'];
+    const all = ['notificationsOpen','profileOpen','exportOpen','createOpen'];
     all.forEach(k=>this.state[k]=false);
     this.state[key] = !this.state[key];
     this.syncPanels();
   },
-  closePanels() { this.state.notificationsOpen=false; this.state.profileOpen=false; this.state.exportOpen=false; this.syncPanels(); },
+  closePanels() { this.state.notificationsOpen=false; this.state.profileOpen=false; this.state.exportOpen=false; this.state.createOpen=false; this.syncPanels(); },
   syncPanels() {
-    const map = {notificationsOpen:'notificationPanel', profileOpen:'profilePanel', exportOpen:'exportPanel'};
+    const map = {notificationsOpen:'notificationPanel', profileOpen:'profilePanel', exportOpen:'exportPanel', createOpen:'createPanel'};
     Object.entries(map).forEach(([key,id])=>{
       const el=document.getElementById(id);
       if (el) el.classList.toggle('open', !!this.state[key]);
@@ -125,12 +129,39 @@ const APP = {
     if (!body) return;
     body.innerHTML = `
       <div class="export-step">
-        <button class="option-btn" onclick="APP.exportData('current')">Export Current Selections</button>
-        <button class="option-btn" onclick="APP.exportData('default')">Export Default View</button>
-        <button class="option-btn" onclick="APP.exportData('myview')">Export My View</button>
-        <button class="option-btn" onclick="APP.exportData('all')">Export All</button>
-        <div class="status-note">CSV is always available. Export respects filters, search, sorting, and visible columns unless you choose Export All. </div>
+        <button class="option-btn">Preferences</button>
+        <button class="option-btn">Display Options</button>
+        <button class="option-btn">Saved Views</button>
+        <button class="option-btn">Filters & Admin Tools</button>
+        <div class="status-note">Settings space is reserved for page-level controls and personalization tools.</div>
       </div>`;
+  },
+  renderCreatePanel() {
+    const body = document.getElementById('createBody');
+    if (!body) return;
+    const module = this.state.currentModule;
+    if (module === 'dashboard' || module === 'dashboard_empty') {
+      body.innerHTML = `
+        <div class="create-menu">
+          <button class="option-btn" onclick="APP.switchModule('leads')">+ New Lead</button>
+          <button class="option-btn" onclick="APP.switchModule('accounts')">+ New Account</button>
+          <button class="option-btn" onclick="APP.switchModule('contacts')">+ New Contact</button>
+          <button class="option-btn" onclick="APP.switchModule('users')">+ New User</button>
+          <button class="option-btn" onclick="APP.switchModule('masters')">+ New Master</button>
+        </div>`;
+      return;
+    }
+    body.innerHTML = `<div class="status-note">Create action is context-aware for this module.</div>`;
+  },
+  switchModule(module) {
+    const map = {
+      leads: 'leads.html',
+      accounts: 'accounts.html',
+      contacts: 'contacts.html',
+      users: 'users.html',
+      masters: 'masters.html'
+    };
+    window.location.href = map[module] || 'home.html';
   },
   exportData(mode){
     const module = this.state.currentModule;
@@ -161,6 +192,109 @@ const APP = {
   toggleFullScreen() {
     if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
     else document.exitFullscreen?.();
+  },
+  setupTopbarOptionOne() {
+    const right = document.querySelector('.topbar-right');
+    const searchWrap = right?.querySelector('.search-wrap');
+    if (!right || !searchWrap) return;
+    right.querySelectorAll('.primary-btn:not(.create-btn)').forEach((button)=>button.remove());
+
+    const moduleNames = ['All Modules', 'Leads', 'Accounts', 'Contacts', 'Users', 'Masters'];
+    if (!searchWrap.querySelector('.search-scope')) {
+      const scope = document.createElement('select');
+      scope.className = 'search-scope';
+      scope.id = 'searchScope';
+      scope.innerHTML = moduleNames.map((item)=>`<option value="${item}">${item}</option>`).join('');
+      searchWrap.prepend(scope);
+    }
+
+    const searchInput = searchWrap.querySelector('input');
+    const clearBtn = searchWrap.querySelector('.clear-search');
+    const scope = document.getElementById('searchScope');
+    const moduleMap = {
+      dashboard: 'All Modules',
+      dashboard_empty: 'All Modules',
+      leads: 'Leads',
+      accounts: 'Accounts',
+      contacts: 'Contacts',
+      users: 'Users',
+      masters: 'Masters'
+    };
+    const defaultScope = moduleMap[this.state.currentModule] || 'All Modules';
+    if (scope) scope.value = defaultScope;
+
+    const placeholderByScope = (value) => ({
+      'All Modules': 'Search across CRM records',
+      Leads: 'Search leads',
+      Accounts: 'Search accounts',
+      Contacts: 'Search contacts',
+      Users: 'Search users',
+      Masters: 'Search masters & reference data'
+    }[value] || 'Search across CRM records');
+
+    const syncSearchUi = () => {
+      if (searchInput) {
+        searchInput.placeholder = placeholderByScope(scope?.value || defaultScope);
+      }
+      searchWrap.classList.toggle('has-value', !!searchInput?.value?.trim());
+    };
+
+    scope?.addEventListener('change', syncSearchUi);
+    searchInput?.addEventListener('input', syncSearchUi);
+    clearBtn?.addEventListener('click', ()=>{
+      if (searchInput) searchInput.value = '';
+      syncSearchUi();
+      searchInput?.focus();
+    });
+    syncSearchUi();
+
+    const exportBtn = document.getElementById('exportToggle');
+    const exportPanel = document.getElementById('exportPanel');
+    if (exportBtn) {
+      exportBtn.textContent = '⚙';
+      exportBtn.setAttribute('aria-label', 'Open settings');
+      exportBtn.classList.add('topbar-separator');
+    }
+    const exportHeader = exportPanel?.querySelector('.panel-header strong');
+    if (exportHeader) exportHeader.textContent = 'Settings';
+
+    if (!document.getElementById('createToggle')) {
+      const createWrap = document.createElement('div');
+      createWrap.className = 'header-panel-wrap';
+      createWrap.style.position = 'relative';
+      createWrap.innerHTML = `
+        <button class="primary-btn create-btn" id="createToggle"></button>
+        <div class="dropdown-panel" id="createPanel">
+          <div class="panel-header"><strong>Create</strong><button class="icon-btn" style="width:34px;height:34px" onclick="APP.closePanels()">✕</button></div>
+          <div class="panel-body" id="createBody"></div>
+        </div>`;
+      right.appendChild(createWrap);
+    }
+
+    const createLabel = {
+      dashboard: '+ Create',
+      dashboard_empty: '+ Create',
+      leads: '+ New Lead',
+      accounts: '+ New Account',
+      contacts: '+ New Contact',
+      users: '+ New User',
+      masters: '+ New Master Record'
+    }[this.state.currentModule] || '+ Create';
+    const createBtn = document.getElementById('createToggle');
+    if (createBtn) createBtn.textContent = createLabel;
+
+    const profileTrigger = document.getElementById('profileToggle');
+    const caret = profileTrigger?.querySelector('div:last-child');
+    if (caret) caret.classList.add('caret');
+
+    const settingsWrap = document.getElementById('exportToggle')?.closest('.header-panel-wrap');
+    const notifWrap = document.getElementById('notificationToggle')?.closest('.header-panel-wrap');
+    const fullscreenBtn = document.getElementById('fullscreenToggle');
+    const profileWrap = document.getElementById('profileToggle')?.closest('.header-panel-wrap');
+    const createWrap = document.getElementById('createToggle')?.closest('.header-panel-wrap');
+    [searchWrap, settingsWrap, notifWrap, fullscreenBtn, profileWrap, createWrap]
+      .filter(Boolean)
+      .forEach((el)=>right.appendChild(el));
   },
   renderModule() {
     const module = this.state.currentModule;
