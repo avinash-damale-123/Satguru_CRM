@@ -1,2 +1,2 @@
-# Satguru-Travel-CRM
+# Satguru Travel CRM
 i am building new Satguru CRM 
