@@ -29,7 +29,8 @@
 }
 
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+html,body{margin:0;padding:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden}
+body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 a{text-decoration:none;color:inherit}
 button,input,select,textarea{font:inherit}
 
@@ -274,6 +275,7 @@ button,input,select,textarea{font:inherit}
 .search-wrap.has-value .clear-search{display:block}
 
 .primary-btn,.secondary-btn,.ghost-btn,.danger-btn{
+  min-height:44px;
   height:46px;
   border-radius:14px;
   padding:0 16px;
@@ -425,7 +427,7 @@ button,input,select,textarea{font:inherit}
   box-shadow:var(--shadow);
   padding:20px;
 }
-.kpi-value{font-size:30px;font-weight:800;margin:8px 0}
+.kpi-value{font-size:clamp(1.25rem,2vw + .6rem,1.9rem);font-weight:800;margin:8px 0;word-break:break-word}
 .kpi-label{font-size:13px;color:var(--muted)}
 .kpi-foot{font-size:12px;color:#475569}
 
@@ -718,6 +720,8 @@ tr:hover td{background:#fbfdff}
     min-width:100%;
     flex:1 1 100%;
   }
+  .module-actions{width:100%}
+  .module-actions .search-wrap,.module-actions .primary-btn{width:100%}
   .primary-btn{width:100%}
   .profile-trigger{min-width:58px}
   .dropdown-panel{
@@ -732,7 +736,17 @@ tr:hover td{background:#fbfdff}
   .page{padding:16px}
   .card,.kpi-card,.data-card{border-radius:14px}
   .kpi-grid{grid-template-columns:1fr}
-  table{min-width:760px}
+  .toolbar,.footer-bar{align-items:flex-start}
+  .selected-records{width:100%}
+  .table-wrap{overflow:visible;border:none;background:transparent}
+  table{min-width:100%;border-collapse:separate;border-spacing:0 10px;background:transparent}
+  thead{display:none}
+  tbody,tr,td{display:block;width:100%}
+  tr{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:10px 12px}
+  td{border-bottom:1px dashed #e5e7eb;padding:9px 0;text-align:right;position:relative}
+  td:last-child{border-bottom:none;padding-bottom:2px}
+  td::before{content:attr(data-label);float:left;color:var(--muted);font-weight:600;text-transform:none}
+  .table-actions{justify-content:flex-end}
   .drawer-grid{grid-template-columns:1fr}
   .panel-body{max-height:58vh}
 }

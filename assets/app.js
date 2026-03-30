@@ -254,17 +254,59 @@ const APP = {
       </div>
     `;
   },
+  formatCurrencyINR(amount) {
+    const value = Number(amount) || 0;
+    return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(value);
+  },
+  estimatePipelineValue(leads = [], accounts = []) {
+    const leadStageValue = {
+      'new': 25000,
+      'assigned': 40000,
+      'contacted': 65000,
+      'qualified': 125000,
+      'proposal/discussion': 210000,
+      'pending decision': 280000,
+      'converted': 320000,
+      'lost': 0,
+      'disqualified': 0,
+      'on hold': 30000
+    };
+    const accountValue = {
+      'corporate': 350000,
+      'b2b': 175000,
+      'b2c / retail': 95000
+    };
+
+    const leadTotal = leads.reduce((sum, lead) => {
+      const stage = String(lead.stage || '').toLowerCase();
+      return sum + (leadStageValue[stage] ?? 50000);
+    }, 0);
+
+    const accountTotal = accounts.reduce((sum, account) => {
+      const type = String(account.type || '').toLowerCase();
+      const status = String(account.status || '').toLowerCase();
+      const multiplier = status.includes('active') ? 1 : 0.65;
+      return sum + ((accountValue[type] ?? 100000) * multiplier);
+    }, 0);
+
+    const pipeline = leadTotal + accountTotal;
+    const projected = Math.round(pipeline * 0.38);
+    return { pipeline, projected };
+  },
   renderDashboard() {
     const root = document.getElementById('pageRoot');
     const leads = this.state.data.leads || [];
     const accounts = this.state.data.accounts || [];
     const users = (this.state.data.users || []).filter(u=>u.name);
     const contacts = this.state.data.contacts || [];
+    const moneyMetrics = this.estimatePipelineValue(leads, accounts);
     root.innerHTML = `
       <div class="info-banner">This CRM shell follows the uploaded standards for sidebar, search, footer ranges, pagination, notifications, export, create/read/edit patterns, and profile behavior.</div>
       <div class="kpi-grid">
         <div class="card"><div class="kpi-label">Open Leads</div><div class="kpi-value">${leads.length}</div><div class="kpi-foot">Single structure for corporate, B2B, and retail prospects</div></div>
         <div class="card"><div class="kpi-label">Active Accounts</div><div class="kpi-value">${accounts.length}</div><div class="kpi-foot">Post-conversion relationship entities</div></div>
+        <div class="card"><div class="kpi-label">Pipeline Value (₹)</div><div class="kpi-value">₹${this.formatCurrencyINR(moneyMetrics.pipeline)}</div><div class="kpi-foot">Estimated from lead stage + account type mix</div></div>
+        <div class="card"><div class="kpi-label">Projected Revenue (₹)</div><div class="kpi-value">₹${this.formatCurrencyINR(moneyMetrics.projected)}</div><div class="kpi-foot">Conservative 38% conversion projection</div></div>
         <div class="card"><div class="kpi-label">Contacts</div><div class="kpi-value">${contacts.length}</div><div class="kpi-foot">Stakeholder-level mapping for account coverage</div></div>
         <div class="card"><div class="kpi-label">Users / Roles</div><div class="kpi-value">${users.length || 5}</div><div class="kpi-foot">Role-based access and governance</div></div>
       </div>
@@ -435,10 +477,10 @@ const APP = {
     const pageRows = table.filtered.slice(start ? start - 1 : 0, end);
     body.innerHTML = pageRows.length ? pageRows.map((row, idx)=>`<tr>${columns.map(([key], colIndex)=>{
       const val = row[key] ?? '—';
-      if (colIndex===0 || key==='name') return `<td><span class="record-link" onclick="APP.openRead('${module}', ${idx + start - 1})">${val}</span></td>`;
-      if (key === badgeField || /(status|stage|role|type|linkedTo)$/i.test(key)) return `<td>${this.renderBadge(String(val))}</td>`;
-      return `<td>${val || '—'}</td>`;
-    }).join('')}<td><div class="table-actions"><button class="mini-btn mini-read" onclick="APP.openRead('${module}', ${idx + start - 1})">Read</button><button class="mini-btn mini-edit" onclick="APP.loadEdit('${module}', ${idx + start - 1})">Edit</button><button class="mini-btn mini-delete" onclick="APP.deleteRow('${module}', ${idx + start - 1})">Delete</button></div></td></tr>`).join('') : `<tr><td colspan="${columns.length+1}"><div class="empty-state">No records found</div></td></tr>`;
+      if (colIndex===0 || key==='name') return `<td data-label="${columns[colIndex][1]}"><span class="record-link" onclick="APP.openRead('${module}', ${idx + start - 1})">${val}</span></td>`;
+      if (key === badgeField || /(status|stage|role|type|linkedTo)$/i.test(key)) return `<td data-label="${columns[colIndex][1]}">${this.renderBadge(String(val))}</td>`;
+      return `<td data-label="${columns[colIndex][1]}">${val || '—'}</td>`;
+    }).join('')}<td data-label="Actions"><div class="table-actions"><button class="mini-btn mini-read" onclick="APP.openRead('${module}', ${idx + start - 1})">Read</button><button class="mini-btn mini-edit" onclick="APP.loadEdit('${module}', ${idx + start - 1})">Edit</button><button class="mini-btn mini-delete" onclick="APP.deleteRow('${module}', ${idx + start - 1})">Delete</button></div></td></tr>`).join('') : `<tr><td colspan="${columns.length+1}"><div class="empty-state">No records found</div></td></tr>`;
     if (total === 0) selected.textContent = 'No records found';
     else selected.textContent = `Showing ${start} to ${end} of ${total} entries`;
     this.renderPagination(module, totalPages, total);
