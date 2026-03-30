@@ -1,0 +1,15 @@
+<svg width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="258" height="70" rx="14" fill="white" stroke="#dfe7e2"/>
+  <circle cx="36" cy="36" r="22" fill="url(#g)"/>
+  <path d="M28 39c4 5 12 5 16 0" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="31" cy="31" r="2.5" fill="white"/>
+  <circle cx="41" cy="31" r="2.5" fill="white"/>
+  <text x="66" y="31" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#0f7b3e">Satguru Travel</text>
+  <text x="66" y="50" font-family="Inter, Arial, sans-serif" font-size="13" fill="#6b7280">CRM Platform</text>
+  <defs>
+    <linearGradient id="g" x1="14" y1="14" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f7b3e"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+</svg>
