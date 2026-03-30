@@ -5,6 +5,7 @@ const APP = {
     notificationsOpen: false,
     profileOpen: false,
     exportOpen: false,
+    createOpen: false,
     fullScreen: false,
     drawers: {},
     data: {},
@@ -20,8 +21,11 @@ const APP = {
   ],
   async init() {
     this.state.currentModule = document.body.dataset.module || 'dashboard';
+    this.state.sidebarCollapsed = localStorage.getItem('crm_sidebar_collapsed') === '1';
+    this.setupTopbarOptionOne();
     await this.loadData();
     this.bindShell();
+    this.applyShellState();
     this.renderNotifications();
     this.renderModule();
   },
@@ -35,16 +39,28 @@ const APP = {
     this.state.data = Object.fromEntries(entries);
   },
   bindShell() {
-    const toggle = document.getElementById('sidebarToggle');
-    if (toggle) toggle.addEventListener('click', ()=>this.toggleSidebar());
+    const toggles = document.querySelectorAll('.js-sidebar-toggle');
+    toggles.forEach((toggle)=>toggle.addEventListener('click', ()=>this.toggleSidebar()));
+    this.bindHeaderSearch();
     const bell = document.getElementById('notificationToggle');
     if (bell) bell.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('notificationsOpen');});
+    const settings = document.getElementById('settingsToggle');
+    if (settings) settings.addEventListener('click', ()=>alert('Settings panel will be enabled in the enterprise build.'));
     const profile = document.getElementById('profileToggle');
     if (profile) profile.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('profileOpen');});
     const exportBtn = document.getElementById('exportToggle');
     if (exportBtn) exportBtn.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('exportOpen'); this.renderExportPanel();});
+    const createBtn = document.getElementById('createToggle');
+    if (createBtn) createBtn.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('createOpen'); this.renderCreatePanel();});
     const full = document.getElementById('fullscreenToggle');
     if (full) full.addEventListener('click', ()=>this.toggleFullScreen());
+    const topCreate = document.querySelector('.top-create-btn');
+    if (topCreate) {
+      topCreate.addEventListener('click', ()=>{
+        if (this.state.currentModule === 'dashboard') return this.openCreateFromHome();
+        this.openCreateDrawer(this.state.currentModule);
+      });
+    }
     document.addEventListener('click', (e)=>{
       if (!e.target.closest('.header-panel-wrap')) this.closePanels();
     });
@@ -63,6 +79,34 @@ const APP = {
     const overlay = document.getElementById('overlay');
     if (overlay) overlay.addEventListener('click', ()=>this.closeDrawers());
   },
+  applyShellState() {
+    const sidebar = document.getElementById('sidebar');
+    const main = document.getElementById('main');
+    if (!sidebar || !main) return;
+    sidebar.classList.toggle('collapsed', this.state.sidebarCollapsed);
+    main.classList.toggle('collapsed', this.state.sidebarCollapsed);
+  },
+  bindHeaderSearch() {
+    const wrap = document.querySelector('.topbar .search-wrap');
+    if (!wrap) return;
+    const input = wrap.querySelector('input');
+    const clear = wrap.querySelector('.clear-search');
+    if (!input || !clear) return;
+    let timer;
+    input.addEventListener('input', ()=>{
+      wrap.classList.toggle('has-value', !!input.value.trim());
+      clearTimeout(timer);
+      timer = setTimeout(()=>{}, 350);
+    });
+    clear.addEventListener('click', ()=>{
+      input.value = '';
+      wrap.classList.remove('has-value');
+      input.focus();
+    });
+  },
+  openCreateFromHome() {
+    window.location.href = 'leads.html';
+  },
   toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const main = document.getElementById('main');
@@ -74,16 +118,17 @@ const APP = {
     this.state.sidebarCollapsed = !this.state.sidebarCollapsed;
     sidebar.classList.toggle('collapsed', this.state.sidebarCollapsed);
     main.classList.toggle('collapsed', this.state.sidebarCollapsed);
+    localStorage.setItem('crm_sidebar_collapsed', this.state.sidebarCollapsed ? '1' : '0');
   },
   togglePanel(key) {
-    const all = ['notificationsOpen','profileOpen','exportOpen'];
+    const all = ['notificationsOpen','profileOpen','exportOpen','createOpen'];
     all.forEach(k=>this.state[k]=false);
     this.state[key] = !this.state[key];
     this.syncPanels();
   },
-  closePanels() { this.state.notificationsOpen=false; this.state.profileOpen=false; this.state.exportOpen=false; this.syncPanels(); },
+  closePanels() { this.state.notificationsOpen=false; this.state.profileOpen=false; this.state.exportOpen=false; this.state.createOpen=false; this.syncPanels(); },
   syncPanels() {
-    const map = {notificationsOpen:'notificationPanel', profileOpen:'profilePanel', exportOpen:'exportPanel'};
+    const map = {notificationsOpen:'notificationPanel', profileOpen:'profilePanel', exportOpen:'exportPanel', createOpen:'createPanel'};
     Object.entries(map).forEach(([key,id])=>{
       const el=document.getElementById(id);
       if (el) el.classList.toggle('open', !!this.state[key]);
@@ -125,12 +170,39 @@ const APP = {
     if (!body) return;
     body.innerHTML = `
       <div class="export-step">
-        <button class="option-btn" onclick="APP.exportData('current')">Export Current Selections</button>
-        <button class="option-btn" onclick="APP.exportData('default')">Export Default View</button>
-        <button class="option-btn" onclick="APP.exportData('myview')">Export My View</button>
-        <button class="option-btn" onclick="APP.exportData('all')">Export All</button>
-        <div class="status-note">CSV is always available. Export respects filters, search, sorting, and visible columns unless you choose Export All. </div>
+        <button class="option-btn">Preferences</button>
+        <button class="option-btn">Display Options</button>
+        <button class="option-btn">Saved Views</button>
+        <button class="option-btn">Filters & Admin Tools</button>
+        <div class="status-note">Settings space is reserved for page-level controls and personalization tools.</div>
       </div>`;
+  },
+  renderCreatePanel() {
+    const body = document.getElementById('createBody');
+    if (!body) return;
+    const module = this.state.currentModule;
+    if (module === 'dashboard' || module === 'dashboard_empty') {
+      body.innerHTML = `
+        <div class="create-menu">
+          <button class="option-btn" onclick="APP.switchModule('leads')">+ New Lead</button>
+          <button class="option-btn" onclick="APP.switchModule('accounts')">+ New Account</button>
+          <button class="option-btn" onclick="APP.switchModule('contacts')">+ New Contact</button>
+          <button class="option-btn" onclick="APP.switchModule('users')">+ New User</button>
+          <button class="option-btn" onclick="APP.switchModule('masters')">+ New Master</button>
+        </div>`;
+      return;
+    }
+    body.innerHTML = `<div class="status-note">Create action is context-aware for this module.</div>`;
+  },
+  switchModule(module) {
+    const map = {
+      leads: 'leads.html',
+      accounts: 'accounts.html',
+      contacts: 'contacts.html',
+      users: 'users.html',
+      masters: 'masters.html'
+    };
+    window.location.href = map[module] || 'home.html';
   },
   exportData(mode){
     const module = this.state.currentModule;
@@ -161,6 +233,109 @@ const APP = {
   toggleFullScreen() {
     if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
     else document.exitFullscreen?.();
+  },
+  setupTopbarOptionOne() {
+    const right = document.querySelector('.topbar-right');
+    const searchWrap = right?.querySelector('.search-wrap');
+    if (!right || !searchWrap) return;
+    right.querySelectorAll('.primary-btn:not(.create-btn)').forEach((button)=>button.remove());
+
+    const moduleNames = ['All Modules', 'Leads', 'Accounts', 'Contacts', 'Users', 'Masters'];
+    if (!searchWrap.querySelector('.search-scope')) {
+      const scope = document.createElement('select');
+      scope.className = 'search-scope';
+      scope.id = 'searchScope';
+      scope.innerHTML = moduleNames.map((item)=>`<option value="${item}">${item}</option>`).join('');
+      searchWrap.prepend(scope);
+    }
+
+    const searchInput = searchWrap.querySelector('input');
+    const clearBtn = searchWrap.querySelector('.clear-search');
+    const scope = document.getElementById('searchScope');
+    const moduleMap = {
+      dashboard: 'All Modules',
+      dashboard_empty: 'All Modules',
+      leads: 'Leads',
+      accounts: 'Accounts',
+      contacts: 'Contacts',
+      users: 'Users',
+      masters: 'Masters'
+    };
+    const defaultScope = moduleMap[this.state.currentModule] || 'All Modules';
+    if (scope) scope.value = defaultScope;
+
+    const placeholderByScope = (value) => ({
+      'All Modules': 'Search across CRM records',
+      Leads: 'Search leads',
+      Accounts: 'Search accounts',
+      Contacts: 'Search contacts',
+      Users: 'Search users',
+      Masters: 'Search masters & reference data'
+    }[value] || 'Search across CRM records');
+
+    const syncSearchUi = () => {
+      if (searchInput) {
+        searchInput.placeholder = placeholderByScope(scope?.value || defaultScope);
+      }
+      searchWrap.classList.toggle('has-value', !!searchInput?.value?.trim());
+    };
+
+    scope?.addEventListener('change', syncSearchUi);
+    searchInput?.addEventListener('input', syncSearchUi);
+    clearBtn?.addEventListener('click', ()=>{
+      if (searchInput) searchInput.value = '';
+      syncSearchUi();
+      searchInput?.focus();
+    });
+    syncSearchUi();
+
+    const exportBtn = document.getElementById('exportToggle');
+    const exportPanel = document.getElementById('exportPanel');
+    if (exportBtn) {
+      exportBtn.textContent = '⚙';
+      exportBtn.setAttribute('aria-label', 'Open settings');
+      exportBtn.classList.add('topbar-separator');
+    }
+    const exportHeader = exportPanel?.querySelector('.panel-header strong');
+    if (exportHeader) exportHeader.textContent = 'Settings';
+
+    if (!document.getElementById('createToggle')) {
+      const createWrap = document.createElement('div');
+      createWrap.className = 'header-panel-wrap';
+      createWrap.style.position = 'relative';
+      createWrap.innerHTML = `
+        <button class="primary-btn create-btn" id="createToggle"></button>
+        <div class="dropdown-panel" id="createPanel">
+          <div class="panel-header"><strong>Create</strong><button class="icon-btn" style="width:34px;height:34px" onclick="APP.closePanels()">✕</button></div>
+          <div class="panel-body" id="createBody"></div>
+        </div>`;
+      right.appendChild(createWrap);
+    }
+
+    const createLabel = {
+      dashboard: '+ Create',
+      dashboard_empty: '+ Create',
+      leads: '+ New Lead',
+      accounts: '+ New Account',
+      contacts: '+ New Contact',
+      users: '+ New User',
+      masters: '+ New Master Record'
+    }[this.state.currentModule] || '+ Create';
+    const createBtn = document.getElementById('createToggle');
+    if (createBtn) createBtn.textContent = createLabel;
+
+    const profileTrigger = document.getElementById('profileToggle');
+    const caret = profileTrigger?.querySelector('div:last-child');
+    if (caret) caret.classList.add('caret');
+
+    const settingsWrap = document.getElementById('exportToggle')?.closest('.header-panel-wrap');
+    const notifWrap = document.getElementById('notificationToggle')?.closest('.header-panel-wrap');
+    const fullscreenBtn = document.getElementById('fullscreenToggle');
+    const profileWrap = document.getElementById('profileToggle')?.closest('.header-panel-wrap');
+    const createWrap = document.getElementById('createToggle')?.closest('.header-panel-wrap');
+    [searchWrap, settingsWrap, notifWrap, fullscreenBtn, profileWrap, createWrap]
+      .filter(Boolean)
+      .forEach((el)=>right.appendChild(el));
   },
   renderModule() {
     const module = this.state.currentModule;
@@ -254,17 +429,58 @@ const APP = {
       </div>
     `;
   },
+  formatCurrencyINR(amount) {
+    const value = Number(amount) || 0;
+    return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(value);
+  },
+  estimatePipelineValue(leads = [], accounts = []) {
+    const leadStageValue = {
+      'new': 25000,
+      'assigned': 40000,
+      'contacted': 65000,
+      'qualified': 125000,
+      'proposal/discussion': 210000,
+      'pending decision': 280000,
+      'converted': 320000,
+      'lost': 0,
+      'disqualified': 0,
+      'on hold': 30000
+    };
+    const accountValue = {
+      'corporate': 350000,
+      'b2b': 175000,
+      'b2c / retail': 95000
+    };
+
+    const leadTotal = leads.reduce((sum, lead) => {
+      const stage = String(lead.stage || '').toLowerCase();
+      return sum + (leadStageValue[stage] ?? 50000);
+    }, 0);
+
+    const accountTotal = accounts.reduce((sum, account) => {
+      const type = String(account.type || '').toLowerCase();
+      const status = String(account.status || '').toLowerCase();
+      const multiplier = status.includes('active') ? 1 : 0.65;
+      return sum + ((accountValue[type] ?? 100000) * multiplier);
+    }, 0);
+
+    const pipeline = leadTotal + accountTotal;
+    const projected = Math.round(pipeline * 0.38);
+    return { pipeline, projected };
+  },
   renderDashboard() {
     const root = document.getElementById('pageRoot');
     const leads = this.state.data.leads || [];
     const accounts = this.state.data.accounts || [];
     const users = (this.state.data.users || []).filter(u=>u.name);
     const contacts = this.state.data.contacts || [];
+    const moneyMetrics = this.estimatePipelineValue(leads, accounts);
     root.innerHTML = `
-      <div class="info-banner">This CRM shell follows the uploaded standards for sidebar, search, footer ranges, pagination, notifications, export, create/read/edit patterns, and profile behavior.</div>
       <div class="kpi-grid">
         <div class="card"><div class="kpi-label">Open Leads</div><div class="kpi-value">${leads.length}</div><div class="kpi-foot">Single structure for corporate, B2B, and retail prospects</div></div>
         <div class="card"><div class="kpi-label">Active Accounts</div><div class="kpi-value">${accounts.length}</div><div class="kpi-foot">Post-conversion relationship entities</div></div>
+        <div class="card"><div class="kpi-label">Pipeline Value (₹)</div><div class="kpi-value">₹${this.formatCurrencyINR(moneyMetrics.pipeline)}</div><div class="kpi-foot">Estimated from lead stage + account type mix</div></div>
+        <div class="card"><div class="kpi-label">Projected Revenue (₹)</div><div class="kpi-value">₹${this.formatCurrencyINR(moneyMetrics.projected)}</div><div class="kpi-foot">Conservative 38% conversion projection</div></div>
         <div class="card"><div class="kpi-label">Contacts</div><div class="kpi-value">${contacts.length}</div><div class="kpi-foot">Stakeholder-level mapping for account coverage</div></div>
         <div class="card"><div class="kpi-label">Users / Roles</div><div class="kpi-value">${users.length || 5}</div><div class="kpi-foot">Role-based access and governance</div></div>
       </div>
@@ -435,10 +651,10 @@ const APP = {
     const pageRows = table.filtered.slice(start ? start - 1 : 0, end);
     body.innerHTML = pageRows.length ? pageRows.map((row, idx)=>`<tr>${columns.map(([key], colIndex)=>{
       const val = row[key] ?? '—';
-      if (colIndex===0 || key==='name') return `<td><span class="record-link" onclick="APP.openRead('${module}', ${idx + start - 1})">${val}</span></td>`;
-      if (key === badgeField || /(status|stage|role|type|linkedTo)$/i.test(key)) return `<td>${this.renderBadge(String(val))}</td>`;
-      return `<td>${val || '—'}</td>`;
-    }).join('')}<td><div class="table-actions"><button class="mini-btn mini-read" onclick="APP.openRead('${module}', ${idx + start - 1})">Read</button><button class="mini-btn mini-edit" onclick="APP.loadEdit('${module}', ${idx + start - 1})">Edit</button><button class="mini-btn mini-delete" onclick="APP.deleteRow('${module}', ${idx + start - 1})">Delete</button></div></td></tr>`).join('') : `<tr><td colspan="${columns.length+1}"><div class="empty-state">No records found</div></td></tr>`;
+      if (colIndex===0 || key==='name') return `<td data-label="${columns[colIndex][1]}"><span class="record-link" onclick="APP.openRead('${module}', ${idx + start - 1})">${val}</span></td>`;
+      if (key === badgeField || /(status|stage|role|type|linkedTo)$/i.test(key)) return `<td data-label="${columns[colIndex][1]}">${this.renderBadge(String(val))}</td>`;
+      return `<td data-label="${columns[colIndex][1]}">${val || '—'}</td>`;
+    }).join('')}<td data-label="Actions"><div class="table-actions"><button class="mini-btn mini-read" onclick="APP.openRead('${module}', ${idx + start - 1})">Read</button><button class="mini-btn mini-edit" onclick="APP.loadEdit('${module}', ${idx + start - 1})">Edit</button><button class="mini-btn mini-delete" onclick="APP.deleteRow('${module}', ${idx + start - 1})">Delete</button></div></td></tr>`).join('') : `<tr><td colspan="${columns.length+1}"><div class="empty-state">No records found</div></td></tr>`;
     if (total === 0) selected.textContent = 'No records found';
     else selected.textContent = `Showing ${start} to ${end} of ${total} entries`;
     this.renderPagination(module, totalPages, total);
