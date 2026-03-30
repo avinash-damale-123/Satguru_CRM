@@ -165,6 +165,7 @@ const APP = {
   renderModule() {
     const module = this.state.currentModule;
     if (module === 'dashboard') return this.renderDashboard();
+    if (module === 'dashboard_empty') return this.renderDashboardEmpty();
     const configs = {
       leads: {
         title:'Lead Management', subtitle:'Create, qualify, search, and manage all leads', data:this.state.data.leads,
@@ -242,6 +243,16 @@ const APP = {
       }
     };
     this.renderDataModule(configs[module]);
+  },
+  renderDashboardEmpty() {
+    const root = document.getElementById('pageRoot');
+    root.innerHTML = `
+      <div class="card">
+        <div class="section-title">Dashboard (Planned)</div>
+        <p class="section-subtitle">This page is reserved for charts and graphs. It is intentionally empty for now.</p>
+        <div class="empty-state">Upcoming: KPI trend charts, pipeline funnel, conversion graph, and branch-level performance widgets.</div>
+      </div>
+    `;
   },
   renderDashboard() {
     const root = document.getElementById('pageRoot');
