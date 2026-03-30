@@ -8,13 +8,22 @@
     "department": "CRM",
     "status": "Active"
   },
-  {
+   {
     "id": "USR-002",
     "name": "Branch Sales",
     "email": "sales@satguru.com",
     "role": "Sales Executive",
     "branch": "Nairobi",
     "department": "Sales",
+    "status": "Active"
+  },
+  {
+    "id": "USR-004",
+    "name": "Avinash Damale",
+    "email": "Avinash.damale@satgurutravel.com",
+    "role": "Manager",
+    "branch": "Pune",
+    "department": "Management",
     "status": "Active"
   },
   {
