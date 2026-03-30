@@ -45,6 +45,7 @@ button,input,select,textarea{font:inherit}
   background:linear-gradient(180deg,#eff6f1 0%,#f7faf8 100%);
   color:#1f2937;
   padding:14px 12px 16px;
+  padding:0 14px 18px;
   overflow:hidden;
   transition:width .2s ease, transform .2s ease;
   z-index:40;
@@ -68,7 +69,40 @@ button,input,select,textarea{font:inherit}
   box-shadow:0 8px 24px rgba(15,23,42,.05);
 }
 .brand{
+  min-height:88px;
   display:flex;
+  align-items:center;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+}
+.brand-mark{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.brand-mark img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+}
+.brand-logo{
+  width:160px;
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+.brand-copy{
+  display:flex;
+  flex-direction:column;
   align-items:center;
   gap:8px;
   width:100%;
@@ -102,6 +136,14 @@ button,input,select,textarea{font:inherit}
   justify-content:center;
   flex:1;
   text-align:center;
+  flex:1;
+  text-align:center;
+}
+.brand-copy h1{font-size:20px;margin:8px 0 0}
+.brand-copy p{
+  margin:0;
+  color:#6b7280;
+  font-size:13px;
 }
 .brand-copy h1{font-size:31px;margin:4px 0 0;line-height:1;color:#0f2a4a}
 .sidebar-toggle{
@@ -135,6 +177,10 @@ button,input,select,textarea{font:inherit}
 }
 .sidebar-modules::-webkit-scrollbar-track{
   background:#eef4ef;
+  height:calc(100vh - 106px);
+  overflow:auto;
+  border-right:1px solid #dfe7e2;
+  padding-right:10px;
 }
 .sidebar-section{margin-top:10px}
 .sidebar-section-title{
@@ -750,6 +796,7 @@ tr:hover td{background:#fbfdff}
   .sidebar.mobile-open{transform:translateX(0)}
   .sidebar-modules{
     height:calc(100vh - 134px);
+    height:calc(100vh - 96px);
   }
   .main,.main.collapsed{
     margin-left:0;
