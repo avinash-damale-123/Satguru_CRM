@@ -338,17 +338,63 @@ button,input,select,textarea{font:inherit}
 .profile-trigger{
   display:flex;
   align-items:center;
-  gap:12px;
+  justify-content:center;
+  gap:0;
   border:1px solid var(--line);
   border-radius:16px;
-  padding:8px 12px;
+  padding:8px;
   background:#fff;
   cursor:pointer;
-  min-width:230px;
+  width:58px;
+  min-width:58px;
+  overflow:hidden;
+  transition:all .22s ease;
 }
-.profile-copy strong{display:block;font-size:14px}
-.profile-copy span{font-size:12px;color:var(--muted)}
 
+.profile-copy{
+  width:0;
+  opacity:0;
+  overflow:hidden;
+  white-space:nowrap;
+  transition:all .22s ease;
+}
+
+.profile-trigger > div:last-child{
+  width:0;
+  opacity:0;
+  overflow:hidden;
+  transition:all .22s ease;
+}
+
+.header-panel-wrap:hover .profile-trigger,
+.header-panel-wrap:focus-within .profile-trigger{
+  justify-content:flex-start;
+  gap:12px;
+  width:210px;
+  padding:8px 12px;
+}
+
+.header-panel-wrap:hover .profile-copy,
+.header-panel-wrap:focus-within .profile-copy{
+  width:auto;
+  opacity:1;
+}
+
+.header-panel-wrap:hover .profile-trigger > div:last-child,
+.header-panel-wrap:focus-within .profile-trigger > div:last-child{
+  width:auto;
+  opacity:1;
+}
+
+.profile-copy strong{
+  display:block;
+  font-size:14px;
+}
+
+.profile-copy span{
+  font-size:12px;
+  color:var(--muted);
+}
 .page{padding:24px}
 .info-banner{
   background:#eaf6ef;
@@ -624,7 +670,7 @@ tr:hover td{background:#fbfdff}
   .search-wrap{min-width:100%}
   .topbar{align-items:flex-start;flex-direction:column}
   .topbar-right{width:100%}
-  .profile-trigger{min-width:100%}
+  .profile-trigger{min-width:58px}
 }
 @media (max-width:640px){
   .page{padding:18px}
