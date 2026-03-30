@@ -113,6 +113,12 @@
       <div class="login-card">
         <h2>Welcome Back</h2>
         <p>Sign in to Satguru CRM by Satguru Travel.</p>
+
+        <form id="loginForm" action="home.html" method="get" novalidate>
+          <div class="form-group">
+            <label>Email Address <span class="required">*</span></label>
+            <input class="input" type="email" value="admin@satguru.com" required />
+          </div>
         <div class="row-between">
           <label class="remember-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
           <button class="link-btn" type="button" id="forgotToggle">Forgot Password?</button>
@@ -164,6 +170,25 @@
       <div class="divider">back</div>
       <button class="ghost-btn" type="button" id="backToLogin">Return to Login</button>
     </section>
+  </div>
+  <script>
+    (function () {
+      const form = document.getElementById('loginForm');
+      if (!form) return;
+      form.addEventListener('submit', function (event) {
+        const email = form.querySelector('input[type="email"]');
+        const password = form.querySelector('input[type="password"]');
+        const emailValue = (email?.value || '').trim();
+        const passwordValue = (password?.value || '').trim();
+        if (!emailValue || !passwordValue) {
+          event.preventDefault();
+          alert('Please enter both email and password to continue.');
+          return;
+        }
+        event.preventDefault();
+        window.location.href = 'home.html';
+      });
+    })();
   </main>
 
   <script>

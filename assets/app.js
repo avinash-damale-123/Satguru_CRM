@@ -45,6 +45,7 @@ const APP = {
     const bell = document.getElementById('notificationToggle');
     if (bell) bell.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('notificationsOpen');});
     const settings = document.getElementById('settingsToggle');
+    if (settings) settings.addEventListener('click', ()=>this.notifySettingsPending());
     if (settings) settings.addEventListener('click', ()=>alert('Settings panel will be enabled in the enterprise build.'));
     const profile = document.getElementById('profileToggle');
     if (profile) profile.addEventListener('click', (e)=>{e.stopPropagation(); this.togglePanel('profileOpen');});
@@ -106,6 +107,17 @@ const APP = {
   },
   openCreateFromHome() {
     window.location.href = 'leads.html';
+  },
+  notifySettingsPending() {
+    this.notifications.unshift({
+      id: Date.now(),
+      type: 'info',
+      title: 'Settings',
+      description: 'Settings panel will be enabled in the enterprise build.',
+      timestamp: 'Just now',
+      unread: true
+    });
+    this.renderNotifications();
   },
   toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
