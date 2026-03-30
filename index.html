@@ -226,6 +226,7 @@
     }
 
     function allowedEmails() {
+      return [SUPER_ADMIN.email, LEGACY_ADMIN_EMAIL];
       return [SUPER_ADMIN.email, LEGACY_ADMIN.email];
     }
 
@@ -268,6 +269,8 @@
       }
 
       const emailAllowed = allowedEmails().includes(email);
+      const passwordAllowed = password === expectedPassword;
+
       const passwordAllowed = allowedPasswords().includes(password);
       if (!emailAllowed || !passwordAllowed) {
         showStatus(loginStatus, 'error', 'Invalid credentials. Check username/password and try again.');
