@@ -69,22 +69,6 @@ button,input,select,textarea{font:inherit}
   gap:8px;
   width:100%;
 }
-.brand-mark{
-  width:50px;
-  height:50px;
-  border-radius:14px;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  border:none;
-  background:linear-gradient(135deg,#0f7b3e,#15803d);
-  box-shadow:0 14px 30px rgba(15,123,62,.22);
-}
-.brand-mark img{
-  width:36px;
-  height:36px;
-  object-fit:contain;
-}
 .brand-logo{
   width:152px;
   max-width:100%;
@@ -121,7 +105,6 @@ button,input,select,textarea{font:inherit}
 }
 .sidebar.collapsed .sidebar-toggle{margin-left:0}
 .sidebar.collapsed .brand-copy{display:none}
-.sidebar.collapsed .brand-mark{display:flex}
 .sidebar.collapsed .sidebar-header{justify-content:center}
 
 .sidebar-modules{
@@ -808,7 +791,6 @@ tr:hover td{background:#fbfdff}
 }
 @media (max-width:420px){
   .brand{gap:8px}
-  .brand-mark{width:40px;height:40px;border-radius:13px}
   .sidebar-toggle{width:34px;height:34px}
   .topbar-title h2{font-size:20px}
   .topbar-title p{font-size:12px}
