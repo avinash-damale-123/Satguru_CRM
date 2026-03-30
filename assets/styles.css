@@ -42,7 +42,7 @@ button,input,select,textarea{font:inherit}
   top:0;
   bottom:0;
   width:var(--sidebar-width);
-  background:#f3f8f4;
+  background:linear-gradient(180deg,#eff6f1 0%,#f7faf8 100%);
   color:#1f2937;
   padding:14px 12px 16px;
   overflow:hidden;
@@ -115,7 +115,7 @@ button,input,select,textarea{font:inherit}
   height:38px;
   border-radius:11px;
   border:1px solid var(--line);
-  background:#fff;
+  background:#f8fbf9;
   cursor:pointer;
   color:#1f2937;
 }
@@ -151,27 +151,27 @@ button,input,select,textarea{font:inherit}
   margin:0 0 6px 8px;
 }
 
-.nav{display:grid;gap:4px}
+.nav{display:grid;gap:2px}
 .nav-link{
   display:flex;
   align-items:center;
   gap:10px;
-  padding:10px 10px;
-  border-radius:12px;
+  padding:8px 10px;
+  border-radius:14px;
   color:#374151;
   border:1px solid transparent;
   position:relative;
 }
-.nav-link:hover{background:#eef6f0}
+.nav-link:hover{background:#eaf4ee}
 .nav-link.active{
-  background:linear-gradient(90deg,#dff3e5,#edf9f1);
-  border-color:#b7e4c7;
+  background:linear-gradient(90deg,#dff2e7,#eef8f2);
+  border-color:#b1dcbf;
   color:#0b5f30;
-  box-shadow:0 4px 12px rgba(15,123,62,.12);
+  box-shadow:0 10px 20px rgba(15,123,62,.14);
 }
 .nav-icon{
-  width:34px;
-  height:34px;
+  width:32px;
+  height:32px;
   border-radius:10px;
   background:#ffffff;
   border:1px solid var(--line);
@@ -204,7 +204,7 @@ button,input,select,textarea{font:inherit}
 .sidebar.collapsed .nav-link:hover .tooltip{display:block}
 
 .sidebar-footer{
-  margin-top:14px;
+  margin-top:10px;
   padding-top:14px;
   border-top:1px solid var(--line);
 }
