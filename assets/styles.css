@@ -44,11 +44,10 @@ button,input,select,textarea{font:inherit}
   width:var(--sidebar-width);
   background:#f3f8f4;
   color:#1f2937;
-  padding:18px 14px;
-  overflow:auto;
+  padding:0 14px 18px;
+  overflow:hidden;
   transition:width .2s ease, transform .2s ease;
   z-index:40;
-  border-right:1px solid #dfe7e2;
 }
 .sidebar.collapsed{width:var(--sidebar-collapsed)}
 .sidebar.collapsed .brand-copy,
@@ -58,26 +57,51 @@ button,input,select,textarea{font:inherit}
 .sidebar.collapsed .nav-link{justify-content:center}
 .sidebar.collapsed .nav-icon{margin-right:0}
 
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.brand-mark{
-  width:46px;
-  height:46px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#0f7b3e,#15803d);
+.sidebar-header{
+  min-height:88px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-weight:800;
-  color:#fff;
-  box-shadow:0 14px 30px rgba(15,123,62,.22);
 }
-.brand-copy h1{font-size:22px;margin:0 0 4px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+}
+.brand-mark{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.brand-mark img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+}
+.brand-logo{
+  width:160px;
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+.brand-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  text-align:center;
+}
+.brand-copy h1{font-size:20px;margin:8px 0 0}
 .brand-copy p{
   margin:0;
   color:#6b7280;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
+  font-size:13px;
 }
 .sidebar-toggle{
   margin-left:auto;
@@ -90,6 +114,16 @@ button,input,select,textarea{font:inherit}
   color:#1f2937;
 }
 .sidebar.collapsed .sidebar-toggle{margin-left:0}
+.sidebar.collapsed .brand-copy{display:none}
+.sidebar.collapsed .brand-mark{display:flex}
+.sidebar.collapsed .sidebar-header{justify-content:center}
+
+.sidebar-modules{
+  height:calc(100vh - 106px);
+  overflow:auto;
+  border-right:1px solid #dfe7e2;
+  padding-right:10px;
+}
 .sidebar-section{margin-top:10px}
 .sidebar-section-title{
   font-size:11px;
@@ -702,6 +736,9 @@ tr:hover td{background:#fbfdff}
 @media (max-width:860px){
   .sidebar{position:fixed;transform:translateX(-100%)}
   .sidebar.mobile-open{transform:translateX(0)}
+  .sidebar-modules{
+    height:calc(100vh - 96px);
+  }
   .main,.main.collapsed{
     margin-left:0;
     width:100%;
