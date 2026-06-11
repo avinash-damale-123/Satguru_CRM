@@ -90,18 +90,10 @@
       <p>Welcome to Satguru Travel CRM</p>
 
       <div id="loginStatus" class="status-box"></div>
-      <div class="creds-box">
-        Super Admin Login (use either):
-        <span>Email <code>superadmin@satguru.com</code></span>,
-        <span>Password <code>Satguru@123</code></span><br/>
-        <span>Email <code>admin@satguru.com</code></span>,
-        <span>Password <code>Admin@123</code></span>
-      </div>
-
       <form id="loginForm" novalidate>
         <div class="form-group">
           <label for="loginEmail">Username / Email <span class="required">*</span></label>
-          <input class="input" id="loginEmail" name="email" type="email" placeholder="admin@satguru.com" required />
+          <input class="input" id="loginEmail" name="email" type="email" placeholder="Enter username or email" required />
         </div>
 
         <div class="form-group">
@@ -136,7 +128,7 @@
       <form id="forgotEmailForm" novalidate>
         <div class="form-group">
           <label for="forgotEmail">Registered Email <span class="required">*</span></label>
-          <input class="input" id="forgotEmail" type="email" placeholder="admin@satguru.com" required />
+          <input class="input" id="forgotEmail" type="email" placeholder="Enter registered email" required />
         </div>
         <button class="primary-btn" type="submit">Send Reset Code</button>
       </form>
