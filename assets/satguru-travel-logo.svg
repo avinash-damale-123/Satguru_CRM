@@ -1,16 +1,28 @@
-<svg width="220" height="64" viewBox="0 0 220 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Satguru Travel</title>
+  <desc id="desc">Official Satguru Travel brand logo with green wordmark, orange globe swoosh, and Travel text.</desc>
   <defs>
-    <linearGradient id="globe" x1="13" y1="8" x2="41" y2="36" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0f7b3e"/>
-      <stop offset="1" stop-color="#8ccfc0"/>
-    </linearGradient>
+    <radialGradient id="earth" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(324 92) rotate(124) scale(82 79)">
+      <stop offset="0" stop-color="#fffde8"/>
+      <stop offset="0.45" stop-color="#a9dccc"/>
+      <stop offset="1" stop-color="#008342"/>
+    </radialGradient>
   </defs>
-  <circle cx="28" cy="24" r="16" fill="url(#globe)"/>
-  <path d="M15 14c3-7 20-9 27 2" stroke="#e97824" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M40 33c-5 6-18 6-23 0" stroke="#e97824" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M27 38c8-7 16 6 8 12-10 7-23-5-10-14" stroke="#e97824" stroke-width="3.8" stroke-linecap="round" fill="none"/>
-  <text x="53" y="34" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f7b3e">sat</text>
-  <text x="100" y="38" font-family="Inter, Arial, sans-serif" font-size="35" font-weight="500" fill="#e97824">g</text>
-  <text x="124" y="34" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f7b3e">uru</text>
-  <text x="54" y="54" font-family="Inter, Arial, sans-serif" font-size="10" letter-spacing="2.8" fill="#334155">TRAVEL</text>
+  <g transform="translate(0 4)">
+    <circle cx="326" cy="95" r="77" fill="url(#earth)"/>
+    <path d="M293 28c27-21 73-18 98 8" stroke="#e97824" stroke-width="8" stroke-linecap="round"/>
+    <path d="M390 151c-25 28-78 30-108 1" stroke="#e97824" stroke-width="8" stroke-linecap="round"/>
+    <path d="M317 21c-10 15-6 29 13 36 16 6 25 17 16 31-7 11-22 9-33 17-16 11-6 35 20 42" fill="#fff" opacity=".9"/>
+    <path d="M276 68c21 3 31 11 26 25-4 12-21 13-33 8" fill="#fff" opacity=".96"/>
+    <path d="M354 45c18 8 33 19 43 37-22-5-41-5-48-17-3-6-2-13 5-20Z" fill="#0f7b3e" opacity=".86"/>
+    <path d="M302 167c63-32 115 8 85 45-31 39-138 20-130-31 3-19 21-32 45-44" stroke="#e97824" stroke-width="20" stroke-linecap="round" fill="none"/>
+    <path d="M49 154h59c16 0 24 10 23 23-1 12-10 21-25 21H56c-7 0-12 5-12 12s5 12 12 12h66" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M166 130v92" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round"/>
+    <path d="M166 178h56c18 0 34 14 34 33v11" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M275 178c-22 0-40 18-40 40s18 40 40 40 40-18 40-40v-40" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M409 178v44c0 20 16 36 36 36s36-16 36-36v-44" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M515 258v-80h64" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M579 178c23 0 39 17 39 40s-16 40-39 40" stroke="#0f7b3e" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="214" y="326" font-family="Georgia, 'Times New Roman', serif" font-size="42" letter-spacing="22" fill="#111827">TRAVEL</text>
+  </g>
 </svg>

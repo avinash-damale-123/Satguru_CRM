@@ -829,3 +829,184 @@ tr:hover td{background:#fbfdff}
     padding:0 12px;
   }
 }
+
+/* Premium Satguru CRM authentication experience */
+.auth-page {
+  min-height: 100vh;
+  margin: 0;
+  color: #172033;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(15, 123, 62, .18), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(233, 120, 36, .16), transparent 26%),
+    linear-gradient(135deg, #f7fbf8 0%, #edf7f1 45%, #fff7ef 100%);
+}
+.auth-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(15, 123, 62, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 123, 62, .045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(120deg, rgba(0,0,0,.8), transparent 76%);
+}
+.auth-page .auth-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.02fr minmax(410px, .78fr);
+  align-items: center;
+  gap: 34px;
+  padding: 42px 0;
+}
+.auth-page .auth-hero {
+  padding: 38px;
+  border: 1px solid rgba(255,255,255,.58);
+  border-radius: 34px;
+  background: linear-gradient(145deg, rgba(8, 68, 41, .95), rgba(15, 123, 62, .88));
+  color: #fff;
+  box-shadow: 0 30px 80px rgba(11, 95, 48, .28);
+  overflow: hidden;
+  position: relative;
+}
+.auth-page .auth-hero::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -95px;
+  top: -75px;
+  border-radius: 50%;
+  border: 42px solid rgba(233, 120, 36, .22);
+}
+.auth-page .hero-badge {
+  width: fit-content;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(255,255,255,.12);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.auth-page .auth-hero h1 {
+  max-width: 720px;
+  margin: 26px 0 14px;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+.auth-page .auth-hero p {
+  max-width: 640px;
+  color: rgba(255,255,255,.82);
+  font-size: 18px;
+  line-height: 1.65;
+}
+.auth-page .feature-grid { display: grid; gap: 14px; margin-top: 36px; }
+.auth-page .feature-card {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+}
+.auth-page .feature-card span { grid-row: span 2; display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background: rgba(255,255,255,.16); }
+.auth-page .feature-card strong { font-size: 15px; }
+.auth-page .feature-card small { color: rgba(255,255,255,.72); line-height:1.45; }
+.auth-page .auth-panel { width: 100%; }
+.auth-page .auth-card {
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 30px;
+  padding: 30px;
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 28px 70px rgba(15, 23, 42, .16);
+  backdrop-filter: blur(18px);
+  transition: transform .24s ease, box-shadow .24s ease;
+}
+.auth-page .auth-card:hover { transform: translateY(-2px); box-shadow: 0 34px 86px rgba(15, 23, 42, .18); }
+.auth-page .logo-wrap { display:flex; justify-content:center; margin-bottom: 20px; }
+.auth-page .satguru-logo { width: min(320px, 88%); height: auto; object-fit: contain; filter: drop-shadow(0 12px 18px rgba(15, 123, 62, .10)); }
+.auth-page .auth-heading { text-align: center; margin-bottom: 22px; }
+.auth-page .auth-card h2 { margin: 0 0 8px; color: #0b5f30; font-size: 30px; letter-spacing: -.03em; }
+.auth-page .auth-heading p, .auth-page .auth-copy, .auth-page .security-note, .auth-page .access-note { color: #667085; line-height: 1.55; }
+.auth-page .form-group { margin-bottom: 16px; }
+.auth-page .form-group label { display:block; margin: 0 0 8px; color:#253044; font-weight: 800; font-size: 14px; }
+.auth-page .required { color: #e97824; }
+.auth-page .input-shell { position: relative; display:flex; align-items:center; }
+.auth-page .field-icon { position:absolute; left: 15px; color:#0f7b3e; font-weight: 900; z-index:1; }
+.auth-page .input {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #d7e3dc;
+  border-radius: 15px;
+  background: #fbfefc;
+  color: #172033;
+  padding: 13px 15px;
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.auth-page .input-shell .input { padding-left: 44px; padding-right: 72px; }
+.auth-page .input:focus { border-color: #0f7b3e; background:#fff; box-shadow: 0 0 0 4px rgba(15,123,62,.12); }
+.auth-page .input.invalid { border-color: #dc2626; box-shadow: 0 0 0 4px rgba(220,38,38,.10); }
+.auth-page .textarea { resize: vertical; min-height: 92px; }
+.auth-page .password-toggle, .auth-page .link-btn, .auth-page .back-link { border: 0; background: transparent; color:#0f7b3e; font-weight: 800; cursor:pointer; }
+.auth-page .password-toggle { position:absolute; right:12px; padding: 6px 8px; border-radius: 10px; }
+.auth-page .password-toggle:hover, .auth-page .link-btn:hover, .auth-page .back-link:hover { color:#e97824; }
+.auth-page .password-toggle:focus-visible, .auth-page .link-btn:focus-visible, .auth-page .back-link:focus-visible, .auth-page .primary-btn:focus-visible { outline: 3px solid rgba(233,120,36,.34); outline-offset: 3px; }
+.auth-page .field-error { min-height: 18px; margin: 6px 0 0; color:#b42318; font-size: 12px; font-weight: 700; }
+.auth-page .row-between { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 2px 0 18px; flex-wrap:wrap; }
+.auth-page .remember-wrap { display:flex; align-items:center; gap:9px; font-size: 14px; color:#344054; cursor:pointer; }
+.auth-page .remember-wrap input { width: 18px; height:18px; accent-color:#0f7b3e; }
+.auth-page .primary-btn.auth-submit {
+  width:100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 16px;
+  color:#fff;
+  background: linear-gradient(135deg, #0b5f30, #0f7b3e);
+  box-shadow: 0 16px 32px rgba(15,123,62,.24);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight: 900;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.auth-page .primary-btn.auth-submit:hover { transform: translateY(-1px); box-shadow: 0 20px 40px rgba(233,120,36,.20), 0 16px 32px rgba(15,123,62,.24); filter:saturate(1.08); }
+.auth-page .primary-btn.auth-submit:active { transform: translateY(0); }
+.auth-page .primary-btn.auth-submit:disabled { opacity:.72; cursor:not-allowed; transform:none; }
+.auth-page .btn-spinner { display:none; width:17px; height:17px; border-radius:50%; border:2px solid rgba(255,255,255,.42); border-top-color:#fff; animation: spin .8s linear infinite; }
+.auth-page .loading .btn-spinner { display:block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.auth-page .status-box { display:none; margin: 0 0 16px; padding: 12px 14px; border-radius: 14px; font-size: 13px; font-weight: 750; line-height:1.45; }
+.auth-page .status-box.error { display:block; background:#fff1f0; border:1px solid #fecaca; color:#b42318; }
+.auth-page .status-box.success { display:block; background:#ecfdf3; border:1px solid #bbf7d0; color:#067647; }
+.auth-page .access-note { display:flex; justify-content:center; align-items:center; gap: 6px; flex-wrap:wrap; margin-top:18px; font-size:14px; }
+.auth-page .security-note { margin: 18px 0 0; text-align:center; font-size:12px; }
+.auth-page .hidden { display:none !important; }
+.auth-page .back-link { margin-bottom: 18px; padding: 0; }
+.auth-page .two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 980px) {
+  .auth-page .auth-shell { grid-template-columns: 1fr; width: min(620px, calc(100% - 28px)); gap: 18px; }
+  .auth-page .auth-hero { padding: 26px; }
+  .auth-page .auth-hero h1 { font-size: 36px; }
+}
+@media (max-width: 620px) {
+  .auth-page .auth-shell { width: min(100% - 20px, 520px); padding: 18px 0; }
+  .auth-page .auth-hero { display:none; }
+  .auth-page .auth-card { padding: 22px 16px; border-radius: 24px; }
+  .auth-page .satguru-logo { width: min(280px, 92%); }
+  .auth-page .auth-card h2 { font-size: 25px; }
+  .auth-page .two-col { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
