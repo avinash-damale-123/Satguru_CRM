@@ -5,349 +5,235 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Satguru CRM Login</title>
   <link rel="stylesheet" href="assets/styles.css" />
-  <style>
-    :root{color-scheme:light}
-    body{
-      min-height:100vh;
-      margin:0;
-      display:grid;
-      place-items:center;
-      padding:20px;
-      background:linear-gradient(135deg,#f7faf8,#eaf6ef 60%,#fff4ea);
-    }
-    .auth-wrap{width:min(520px,100%)}
-    .logo-wrap{display:grid;place-items:center;margin-bottom:18px}
-    .logo-wrap img{max-width:260px;width:100%;height:auto}
-    .auth-card{
-      background:#fff;
-      border:1px solid #dfe7e2;
-      border-radius:16px;
-      padding:26px 22px;
-      box-shadow:0 16px 34px rgba(15,23,42,.08);
-    }
-    .auth-card h1{margin:0 0 6px;font-size:28px;color:#0b5f30;text-align:center}
-    .auth-card p{margin:0 0 20px;color:var(--muted);text-align:center}
-    .form-group{margin-bottom:14px}
-    .input{width:100%}
-    .row-between{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-    .remember-wrap{display:flex;align-items:center;gap:8px;color:#374151;font-size:14px}
-    .link-btn{background:none;border:none;color:#0f7b3e;cursor:pointer;padding:0;font-weight:600}
-    .auth-card .primary-btn,.auth-card .ghost-btn{width:100%}
-    .status-box{
-      margin:12px 0;
-      border-radius:10px;
-      padding:10px 12px;
-      font-size:13px;
-      display:none;
-    }
-    .status-box.error{display:block;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c}
-    .status-box.success{display:block;background:#ecfdf3;border:1px solid #bbf7d0;color:#166534}
-    .creds-box{
-      margin:0 0 14px;
-      border-radius:10px;
-      padding:10px 12px;
-      font-size:13px;
-      background:#eff6ff;
-      border:1px solid #bfdbfe;
-      color:#1e3a8a;
-    }
-    .creds-box code{
-      font-weight:700;
-      background:#fff;
-      border:1px solid #dbeafe;
-      border-radius:6px;
-      padding:1px 6px;
-      margin-left:4px;
-    }
-    .divider{display:flex;align-items:center;gap:8px;color:#6b7280;font-size:13px;margin:12px 0}
-    .divider::before,.divider::after{content:"";height:1px;flex:1;background:#e5e7eb}
-    .hidden{display:none}
-    .rule-list{margin:10px 0 0;padding-left:16px;color:#6b7280;font-size:12px}
-    @media (max-width:560px){
-      body{padding:12px}
-      .auth-card{padding:20px 14px}
-      .auth-card h1{font-size:24px}
-    }
-  </style>
 </head>
-<body>
-  <div class="login-shell">
-    <section class="login-left">
-      <div class="brand" style="margin-bottom:20px">
-        <div class="brand-mark">G</div>
-        <div class="brand-copy">
-          <h1>Satguru Travel</h1>
-          <p>Satguru CRM</p>
-        </div>
+<body class="auth-page">
+  <main class="auth-shell" aria-label="Satguru CRM secure login">
+    <section class="auth-hero" aria-label="CRM platform highlights">
+      <div class="hero-badge">Protected login · Authorized users only</div>
+      <h1>Manage global travel relationships from one secure CRM platform.</h1>
+      <p>Bring clients, leads, meetings, branch performance, and role-based workflows together in a polished Satguru Travel workspace.</p>
+      <div class="feature-grid" aria-label="CRM feature highlights">
+        <div class="feature-card"><span aria-hidden="true">👥</span><strong>Client & Lead Management</strong><small>Track prospects, accounts, and follow-ups with clarity.</small></div>
+        <div class="feature-card"><span aria-hidden="true">📈</span><strong>Branch Performance Tracking</strong><small>Monitor activity and business performance across teams.</small></div>
+        <div class="feature-card"><span aria-hidden="true">🔐</span><strong>Secure Role-Based Access</strong><small>Enterprise access controls for authorized CRM users.</small></div>
       </div>
-  <main class="auth-wrap">
-    <div class="logo-wrap">
-      <img src="assets/satguru-travel-logo.svg" alt="Satguru Travel full logo" />
-    </div>
-
-    <section class="auth-card" id="loginCard">
-      <h1>Satguru CRM Login</h1>
-      <p>Welcome to Satguru Travel CRM</p>
-
-      <div id="loginStatus" class="status-box"></div>
-      <form id="loginForm" novalidate>
-        <div class="form-group">
-          <label for="loginEmail">Username / Email <span class="required">*</span></label>
-          <input class="input" id="loginEmail" name="email" type="email" placeholder="Enter username or email" required />
-        </div>
-
-        <div class="form-group">
-          <label for="loginPassword">Password <span class="required">*</span></label>
-          <input class="input" id="loginPassword" name="password" type="password" placeholder="Enter password" required />
-        </div>
-
-    <section class="login-right">
-      <div class="login-card">
-        <h2>Welcome Back</h2>
-        <p>Sign in to Satguru CRM by Satguru Travel.</p>
-        <div class="row-between">
-          <label class="remember-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
-          <button class="link-btn" type="button" id="forgotToggle">Forgot Password?</button>
-        </div>
-
-        <button class="primary-btn" type="submit">Log In</button>
-      </form>
-
-      <div class="divider">or</div>
-      <button class="ghost-btn" type="button" id="showResetBtn">Reset Password</button>
-      <button class="ghost-btn" type="button" id="restoreDefaultBtn" style="margin-top:10px">Restore Default Super Admin Password</button>
     </section>
 
-    <section class="auth-card hidden" id="forgotCard">
-      <h1>Forgot Password</h1>
-      <p>Recover your Satguru CRM account securely.</p>
-      <div id="forgotStatus" class="status-box"></div>
+    <section class="auth-panel" aria-live="polite">
+      <section class="auth-card" id="loginCard" aria-labelledby="loginTitle">
+        <div class="logo-wrap">
+          <img src="assets/satguru-travel-logo.svg" alt="Satguru Travel" class="satguru-logo" width="320" height="112" />
+        </div>
+        <div class="auth-heading">
+          <h2 id="loginTitle">Satguru CRM Login</h2>
+          <p>Welcome back. Sign in to access your CRM dashboard.</p>
+        </div>
 
-        <div class="small-note">Satguru CRM · Satguru Travel</div>
-      </div>
-      <form id="forgotEmailForm" novalidate>
-        <div class="form-group">
-          <label for="forgotEmail">Registered Email <span class="required">*</span></label>
-          <input class="input" id="forgotEmail" type="email" placeholder="Enter registered email" required />
-        </div>
-        <button class="primary-btn" type="submit">Send Reset Code</button>
-      </form>
+        <div id="loginStatus" class="status-box" role="status"></div>
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="loginEmail">Username / Email <span class="required">*</span></label>
+            <div class="input-shell">
+              <span class="field-icon" aria-hidden="true">✉</span>
+              <input class="input" id="loginEmail" name="email" type="text" inputmode="email" autocomplete="username" placeholder="Enter username or email" required aria-describedby="loginEmailError" />
+            </div>
+            <p class="field-error" id="loginEmailError"></p>
+          </div>
 
-      <form id="resetPasswordForm" class="hidden" novalidate style="margin-top:14px">
-        <div class="form-group">
-          <label for="resetCode">Reset Code <span class="required">*</span></label>
-          <input class="input" id="resetCode" type="text" placeholder="Enter 6-digit code" maxlength="6" required />
-        </div>
-        <div class="form-group">
-          <label for="newPassword">New Password <span class="required">*</span></label>
-          <input class="input" id="newPassword" type="password" placeholder="Create new password" required />
-          <ul class="rule-list">
-            <li>Minimum 8 characters</li>
-            <li>At least 1 uppercase, 1 lowercase, 1 number, 1 special character</li>
-          </ul>
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
-          <input class="input" id="confirmPassword" type="password" placeholder="Confirm new password" required />
-        </div>
-        <button class="primary-btn" type="submit">Update Password</button>
-      </form>
+          <div class="form-group">
+            <label for="loginPassword">Password <span class="required">*</span></label>
+            <div class="input-shell">
+              <span class="field-icon" aria-hidden="true">●</span>
+              <input class="input" id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required aria-describedby="loginPasswordError" />
+              <button class="password-toggle" type="button" id="togglePassword" aria-label="Show password">Show</button>
+            </div>
+            <p class="field-error" id="loginPasswordError"></p>
+          </div>
 
-      <div class="divider">back</div>
-      <button class="ghost-btn" type="button" id="backToLogin">Return to Login</button>
+          <div class="row-between">
+            <label class="remember-wrap"><input type="checkbox" id="rememberMe" /> <span>Remember me</span></label>
+            <button class="link-btn" type="button" id="forgotToggle">Forgot Password?</button>
+          </div>
+
+          <button class="primary-btn auth-submit" id="loginSubmit" type="submit">
+            <span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Log In</span>
+          </button>
+        </form>
+
+        <div class="access-note">
+          <span>New user?</span>
+          <button class="link-btn" type="button" id="requestAccessToggle">Request access from admin</button>
+        </div>
+        <p class="security-note">© Satguru Travel. Secure CRM Access.</p>
+      </section>
+
+      <section class="auth-card hidden" id="forgotCard" aria-labelledby="forgotTitle">
+        <button class="back-link" type="button" data-back-login>← Back to login</button>
+        <h2 id="forgotTitle">Forgot Password</h2>
+        <p class="auth-copy">Enter your work email. If an account exists, password reset instructions will be sent.</p>
+        <div id="forgotStatus" class="status-box" role="status"></div>
+        <form id="forgotForm" novalidate>
+          <div class="form-group">
+            <label for="forgotEmail">Work Email <span class="required">*</span></label>
+            <div class="input-shell"><span class="field-icon" aria-hidden="true">✉</span><input class="input" id="forgotEmail" type="email" autocomplete="email" placeholder="Enter work email" required aria-describedby="forgotEmailError" /></div>
+            <p class="field-error" id="forgotEmailError"></p>
+          </div>
+          <button class="primary-btn auth-submit" id="forgotSubmit" type="submit"><span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Send Reset Instructions</span></button>
+        </form>
+      </section>
+
+      <section class="auth-card hidden" id="accessCard" aria-labelledby="accessTitle">
+        <button class="back-link" type="button" data-back-login>← Back to login</button>
+        <h2 id="accessTitle">Request CRM Access</h2>
+        <p class="auth-copy">Submit your details and an administrator will review your access request.</p>
+        <div id="accessStatus" class="status-box" role="status"></div>
+        <form id="accessForm" novalidate>
+          <div class="two-col">
+            <div class="form-group"><label for="fullName">Full Name <span class="required">*</span></label><input class="input" id="fullName" type="text" autocomplete="name" placeholder="Enter full name" required /><p class="field-error" id="fullNameError"></p></div>
+            <div class="form-group"><label for="workEmail">Work Email <span class="required">*</span></label><input class="input" id="workEmail" type="email" autocomplete="email" placeholder="name@satgurutravel.com" required /><p class="field-error" id="workEmailError"></p></div>
+          </div>
+          <div class="two-col">
+            <div class="form-group"><label for="department">Branch / Department <span class="required">*</span></label><input class="input" id="department" type="text" placeholder="e.g. Dubai Sales" required /><p class="field-error" id="departmentError"></p></div>
+            <div class="form-group"><label for="roleRequested">Role Requested <span class="required">*</span></label><input class="input" id="roleRequested" type="text" placeholder="e.g. Sales Manager" required /><p class="field-error" id="roleRequestedError"></p></div>
+          </div>
+          <div class="form-group"><label for="requestMessage">Message</label><textarea class="input textarea" id="requestMessage" rows="3" placeholder="Add business reason or manager approval note"></textarea></div>
+          <button class="primary-btn auth-submit" id="accessSubmit" type="submit"><span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Submit Request</span></button>
+        </form>
+      </section>
     </section>
   </main>
 
   <script>
     const SUPER_ADMIN = { email: 'superadmin@satguru.com', password: 'Satguru@123' };
     const LEGACY_ADMIN = { email: 'admin@satguru.com', password: 'Admin@123' };
-    const state = { resetCode: '', resetUser: '', tempPassword: '' };
+    const REMEMBER_KEY = 'satguru_crm_remembered_identifier';
+    const $ = (id) => document.getElementById(id);
 
-    const loginCard = document.getElementById('loginCard');
-    const forgotCard = document.getElementById('forgotCard');
-    const loginForm = document.getElementById('loginForm');
-    const forgotEmailForm = document.getElementById('forgotEmailForm');
-    const resetPasswordForm = document.getElementById('resetPasswordForm');
+    const cards = { login: $('loginCard'), forgot: $('forgotCard'), access: $('accessCard') };
+    const loginForm = $('loginForm');
+    const forgotForm = $('forgotForm');
+    const accessForm = $('accessForm');
+    const loginEmail = $('loginEmail');
+    const loginPassword = $('loginPassword');
+    const rememberMe = $('rememberMe');
+    const loginSubmit = $('loginSubmit');
 
-    const loginStatus = document.getElementById('loginStatus');
-    const forgotStatus = document.getElementById('forgotStatus');
-
-    const loginEmail = document.getElementById('loginEmail');
-    const loginPassword = document.getElementById('loginPassword');
-    const rememberMe = document.getElementById('rememberMe');
-
-    const forgotEmail = document.getElementById('forgotEmail');
-    const resetCode = document.getElementById('resetCode');
-    const newPassword = document.getElementById('newPassword');
-    const confirmPassword = document.getElementById('confirmPassword');
-
-    function showStatus(el, type, message) {
-      el.className = `status-box ${type}`;
-      el.textContent = message;
+    function showCard(name) {
+      Object.entries(cards).forEach(([key, card]) => card.classList.toggle('hidden', key !== name));
+      clearAllStatuses();
+      const firstInput = cards[name].querySelector('input, textarea, button:not(.back-link)');
+      setTimeout(() => firstInput?.focus(), 80);
     }
 
-    function clearStatus(el) {
-      el.className = 'status-box';
-      el.textContent = '';
+    function setStatus(element, type, message) {
+      element.className = `status-box ${type}`;
+      element.textContent = message;
     }
 
-    function openForgot() {
-      clearStatus(loginStatus);
-      clearStatus(forgotStatus);
-      loginCard.classList.add('hidden');
-      forgotCard.classList.remove('hidden');
-      forgotEmail.focus();
+    function clearAllStatuses() {
+      document.querySelectorAll('.status-box, .field-error').forEach((el) => { el.className = el.classList.contains('status-box') ? 'status-box' : 'field-error'; el.textContent = ''; });
+      document.querySelectorAll('.invalid').forEach((el) => el.classList.remove('invalid'));
     }
 
-    function openLogin() {
-      clearStatus(loginStatus);
-      clearStatus(forgotStatus);
-      forgotCard.classList.add('hidden');
-      loginCard.classList.remove('hidden');
-      resetPasswordForm.classList.add('hidden');
-      forgotEmailForm.reset();
-      resetPasswordForm.reset();
-      state.resetCode = '';
-      state.resetUser = '';
-      state.tempPassword = '';
-      loginEmail.focus();
+    function setFieldError(input, message) {
+      input.classList.add('invalid');
+      const error = $(input.id + 'Error');
+      if (error) error.textContent = message;
     }
 
-    function isValidPasswordFormat(value) {
-      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value);
+    function isEmail(value) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); }
+    function canBeLoginIdentifier(value) { return value && (!value.includes('@') || isEmail(value)); }
+
+    function setLoading(button, isLoading, loadingText) {
+      button.disabled = isLoading;
+      button.classList.toggle('loading', isLoading);
+      button.querySelector('.btn-label').textContent = isLoading ? loadingText : button.dataset.defaultLabel;
     }
 
-    function allowedEmails() {
-      return [SUPER_ADMIN.email, LEGACY_ADMIN_EMAIL];
-      return [SUPER_ADMIN.email, LEGACY_ADMIN.email];
-    }
-
-    function allowedPasswords() {
-      return [getStoredPassword(), SUPER_ADMIN.password, LEGACY_ADMIN.password];
-    }
-
-    function getStoredPassword() {
-      return localStorage.getItem('satguruPassword') || SUPER_ADMIN.password;
-    }
-
-    function setRememberPreference() {
-      if (rememberMe.checked) {
-        localStorage.setItem('rememberEmail', loginEmail.value.trim().toLowerCase());
-      } else {
-        localStorage.removeItem('rememberEmail');
-      }
+    function syncRememberedIdentifier() {
+      const identifier = loginEmail.value.trim().toLowerCase();
+      if (rememberMe.checked && identifier) localStorage.setItem(REMEMBER_KEY, identifier);
+      if (!rememberMe.checked) localStorage.removeItem(REMEMBER_KEY);
     }
 
     function bootRememberedLogin() {
-      const remembered = localStorage.getItem('rememberEmail');
-      if (remembered) {
-        loginEmail.value = remembered;
-        rememberMe.checked = true;
-        return;
-      }
-      loginEmail.value = SUPER_ADMIN.email;
+      const remembered = localStorage.getItem(REMEMBER_KEY);
+      if (remembered) { loginEmail.value = remembered; rememberMe.checked = true; }
+    }
+
+    function validateLogin() {
+      clearAllStatuses();
+      const identifier = loginEmail.value.trim().toLowerCase();
+      let valid = true;
+      if (!identifier) { setFieldError(loginEmail, 'Username or email is required.'); valid = false; }
+      else if (!canBeLoginIdentifier(identifier)) { setFieldError(loginEmail, 'Enter a valid email address or username.'); valid = false; }
+      if (!loginPassword.value) { setFieldError(loginPassword, 'Password is required.'); valid = false; }
+      return valid;
     }
 
     loginForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      clearStatus(loginStatus);
-
-      const email = loginEmail.value.trim().toLowerCase();
-      const password = loginPassword.value;
-
-      if (!email || !password) {
-        showStatus(loginStatus, 'error', 'Please enter both email and password.');
-        return;
-      }
-
-      const emailAllowed = allowedEmails().includes(email);
-      const passwordAllowed = password === expectedPassword;
-
-      const passwordAllowed = allowedPasswords().includes(password);
-      if (!emailAllowed || !passwordAllowed) {
-        showStatus(loginStatus, 'error', 'Invalid credentials. Check username/password and try again.');
-        return;
-      }
-
-      setRememberPreference();
-      showStatus(loginStatus, 'success', 'Login successful. Redirecting to dashboard...');
-      setTimeout(() => { window.location.href = 'home.html'; }, 500);
+      if (loginSubmit.disabled || !validateLogin()) return;
+      setLoading(loginSubmit, true, 'Signing in...');
+      setTimeout(() => {
+        const identifier = loginEmail.value.trim().toLowerCase();
+        const allowedIdentifier = [SUPER_ADMIN.email, LEGACY_ADMIN.email, 'superadmin', 'admin'].includes(identifier);
+        const allowedPassword = [localStorage.getItem('satguruPassword') || SUPER_ADMIN.password, SUPER_ADMIN.password, LEGACY_ADMIN.password].includes(loginPassword.value);
+        if (!allowedIdentifier || !allowedPassword) {
+          setLoading(loginSubmit, false);
+          setStatus($('loginStatus'), 'error', 'Invalid credentials. Check username/password and try again.');
+          return;
+        }
+        syncRememberedIdentifier();
+        setStatus($('loginStatus'), 'success', 'Login successful. Redirecting to dashboard...');
+        window.setTimeout(() => { window.location.href = 'home.html'; }, 500);
+      }, 650);
     });
 
-    forgotEmailForm.addEventListener('submit', (event) => {
+    forgotForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      clearStatus(forgotStatus);
-
-      const email = forgotEmail.value.trim().toLowerCase();
-      if (!email) {
-        showStatus(forgotStatus, 'error', 'Please provide your registered email address.');
-        return;
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showStatus(forgotStatus, 'error', 'Email format is invalid. Please enter a valid email.');
-        return;
-      }
-      if (!allowedEmails().includes(email)) {
-        showStatus(forgotStatus, 'error', 'No active CRM account found for this email.');
-        return;
-      }
-
-      state.resetUser = email;
-      state.resetCode = '123456';
-      state.tempPassword = `Tmp@${Math.floor(1000 + Math.random() * 9000)}`;
-      resetPasswordForm.classList.remove('hidden');
-      showStatus(
-        forgotStatus,
-        'success',
-        `Password reset link has been sent from crm.marketing@satgurutravel.com with temporary password ${state.tempPassword}. Demo reset code: 123456.`
-      );
-      resetCode.focus();
+      clearAllStatuses();
+      const email = $('forgotEmail');
+      if (!email.value.trim()) return setFieldError(email, 'Work email is required.');
+      if (!isEmail(email.value.trim())) return setFieldError(email, 'Enter a valid work email.');
+      setLoading($('forgotSubmit'), true, 'Sending...');
+      setTimeout(() => {
+        setLoading($('forgotSubmit'), false);
+        forgotForm.reset();
+        setStatus($('forgotStatus'), 'success', 'If an account exists, password reset instructions will be sent.');
+      }, 600);
     });
 
-    resetPasswordForm.addEventListener('submit', (event) => {
+    accessForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      clearStatus(forgotStatus);
-
-      const code = resetCode.value.trim();
-      const pass = newPassword.value;
-      const confirm = confirmPassword.value;
-
-      if (!state.resetUser) {
-        showStatus(forgotStatus, 'error', 'Please request a reset code first.');
-        return;
-      }
-      if (!code || code.length !== 6) {
-        showStatus(forgotStatus, 'error', 'Reset code must be exactly 6 digits.');
-        return;
-      }
-      if (code !== state.resetCode) {
-        showStatus(forgotStatus, 'error', 'Invalid reset code. Please check and try again.');
-        return;
-      }
-      if (!isValidPasswordFormat(pass)) {
-        showStatus(forgotStatus, 'error', 'Password format is invalid. Follow all password rules.');
-        return;
-      }
-      if (pass !== confirm) {
-        showStatus(forgotStatus, 'error', 'New password and confirm password do not match.');
-        return;
-      }
-
-      localStorage.setItem('satguruPassword', pass);
-      showStatus(forgotStatus, 'success', 'Password updated successfully. You can now log in.');
-      setTimeout(openLogin, 800);
+      clearAllStatuses();
+      let valid = true;
+      ['fullName','workEmail','department','roleRequested'].forEach((id) => {
+        const input = $(id);
+        if (!input.value.trim()) { setFieldError(input, 'This field is required.'); valid = false; }
+      });
+      if ($('workEmail').value.trim() && !isEmail($('workEmail').value.trim())) { setFieldError($('workEmail'), 'Enter a valid work email.'); valid = false; }
+      if (!valid) return;
+      setLoading($('accessSubmit'), true, 'Submitting...');
+      setTimeout(() => {
+        setLoading($('accessSubmit'), false);
+        accessForm.reset();
+        setStatus($('accessStatus'), 'success', 'Access request submitted. An administrator will review your request.');
+      }, 700);
     });
 
-    document.getElementById('forgotToggle').addEventListener('click', openForgot);
-    document.getElementById('showResetBtn').addEventListener('click', openForgot);
-    document.getElementById('backToLogin').addEventListener('click', openLogin);
-    document.getElementById('restoreDefaultBtn').addEventListener('click', () => {
-      localStorage.setItem('satguruPassword', SUPER_ADMIN.password);
-      loginEmail.value = SUPER_ADMIN.email;
-      loginPassword.value = SUPER_ADMIN.password;
-      showStatus(loginStatus, 'success', 'Default Super Admin credential restored.');
+    $('togglePassword').addEventListener('click', () => {
+      const show = loginPassword.type === 'password';
+      loginPassword.type = show ? 'text' : 'password';
+      $('togglePassword').textContent = show ? 'Hide' : 'Show';
+      $('togglePassword').setAttribute('aria-label', show ? 'Hide password' : 'Show password');
     });
-
+    $('forgotToggle').addEventListener('click', () => showCard('forgot'));
+    $('requestAccessToggle').addEventListener('click', () => showCard('access'));
+    document.querySelectorAll('[data-back-login]').forEach((button) => button.addEventListener('click', () => showCard('login')));
+    document.querySelectorAll('.auth-submit').forEach((button) => { button.dataset.defaultLabel = button.querySelector('.btn-label').textContent; });
+    document.querySelectorAll('input, textarea').forEach((input) => input.addEventListener('input', () => input.classList.remove('invalid')));
+    rememberMe.addEventListener('change', syncRememberedIdentifier);
     bootRememberedLogin();
     loginEmail.focus();
   </script>
