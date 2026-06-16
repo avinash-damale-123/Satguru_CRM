@@ -11,18 +11,24 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-ZSW1VHFYW4');
   </script>
 </head>
 <body class="auth-page auth-v2">
+  <div class="login-plane-wrap" aria-hidden="true">
+    <div class="login-plane">
+      <div class="plane-ribbon">Satguru CRM</div>
+      <div class="plane-shape">✈</div>
+    </div>
+  </div>
+
   <main class="auth-shell" aria-label="Satguru CRM secure login">
     <section class="auth-panel" aria-live="polite">
       <section class="auth-card" id="loginCard" aria-labelledby="loginTitle">
         <div class="logo-wrap">
           <img src="assets/satguru-travel-logo.jpg" alt="Satguru Travel" class="satguru-logo" />
         </div>
-        <div class="login-divider"><span aria-hidden="true">✈</span></div>
+        <div class="login-divider"></div>
         <div class="auth-heading">
           <h1 id="loginTitle">Satguru CRM Login</h1>
           <p>Welcome back! Sign in to access your CRM dashboard.</p>
@@ -79,66 +85,11 @@
             <div class="input-shell"><span class="field-icon" aria-hidden="true">✉</span><input class="input" id="forgotEmail" type="email" autocomplete="email" placeholder="Enter work email" required aria-describedby="forgotEmailError" /></div>
             <p class="field-error" id="forgotEmailError"></p>
           </div>
-          <button class="primary-btn auth-submit" id="forgotSubmit" type="submit"><span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Send Reset Instructions</span></button>
-        </form>
-      </section>
-
-      <section class="auth-card hidden" id="accessCard" aria-labelledby="accessTitle">
-        <button class="back-link" type="button" data-back-login>← Back to login</button>
-        <h2 id="accessTitle">Request CRM Access</h2>
-        <p class="auth-copy">Submit your details and an administrator will review your access request.</p>
-        <div id="accessStatus" class="status-box" role="status"></div>
-        <form id="accessForm" novalidate>
-          <div class="two-col">
-            <div class="form-group"><label for="fullName">Full Name <span class="required">*</span></label><input class="input" id="fullName" type="text" autocomplete="name" placeholder="Enter full name" required /><p class="field-error" id="fullNameError"></p></div>
-            <div class="form-group"><label for="workEmail">Work Email <span class="required">*</span></label><input class="input" id="workEmail" type="email" autocomplete="email" placeholder="name@satgurutravel.com" required /><p class="field-error" id="workEmailError"></p></div>
-          </div>
-          <div class="two-col">
-            <div class="form-group"><label for="department">Branch / Department <span class="required">*</span></label><input class="input" id="department" type="text" placeholder="e.g. Dubai Sales" required /><p class="field-error" id="departmentError"></p></div>
-            <div class="form-group"><label for="roleRequested">Role Requested <span class="required">*</span></label><input class="input" id="roleRequested" type="text" placeholder="e.g. Sales Manager" required /><p class="field-error" id="roleRequestedError"></p></div>
-          </div>
-          <div class="form-group"><label for="requestMessage">Message</label><textarea class="input textarea" id="requestMessage" rows="3" placeholder="Add business reason or manager approval note"></textarea></div>
-          <button class="primary-btn auth-submit" id="accessSubmit" type="submit"><span class="btn-spinner" aria-hidden="true"></span><span class="btn-label">Submit Request</span></button>
+          <button class="primary-btn" type="submit">Send Reset Link</button>
         </form>
       </section>
     </section>
   </main>
-
-  <script>
-    const SUPER_ADMIN = { email: 'superadmin@satguru.com', password: 'Satguru@123' };
-    const LEGACY_ADMIN = { email: 'admin@satguru.com', password: 'Admin@123' };
-    const REMEMBER_KEY = 'satguru_crm_remembered_identifier';
-    const $ = (id) => document.getElementById(id);
-    const cards = { login: $('loginCard'), forgot: $('forgotCard'), access: $('accessCard') };
-    const loginForm = $('loginForm');
-    const forgotForm = $('forgotForm');
-    const accessForm = $('accessForm');
-    const loginEmail = $('loginEmail');
-    const loginPassword = $('loginPassword');
-    const rememberMe = $('rememberMe');
-    const loginSubmit = $('loginSubmit');
-    function showCard(name) { Object.entries(cards).forEach(([key, card]) => card.classList.toggle('hidden', key !== name)); clearAllStatuses(); const firstInput = cards[name].querySelector('input, textarea, button:not(.back-link)'); setTimeout(() => firstInput?.focus(), 80); }
-    function setStatus(element, type, message) { element.className = `status-box ${type}`; element.textContent = message; }
-    function clearAllStatuses() { document.querySelectorAll('.status-box, .field-error').forEach((el) => { el.className = el.classList.contains('status-box') ? 'status-box' : 'field-error'; el.textContent = ''; }); document.querySelectorAll('.invalid').forEach((el) => el.classList.remove('invalid')); }
-    function setFieldError(input, message) { input.classList.add('invalid'); const error = $(input.id + 'Error'); if (error) error.textContent = message; }
-    function isEmail(value) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); }
-    function canBeLoginIdentifier(value) { return value && (!value.includes('@') || isEmail(value)); }
-    function setLoading(button, isLoading, loadingText) { button.disabled = isLoading; button.classList.toggle('loading', isLoading); button.querySelector('.btn-label').textContent = isLoading ? loadingText : button.dataset.defaultLabel; }
-    function syncRememberedIdentifier() { const identifier = loginEmail.value.trim().toLowerCase(); if (rememberMe.checked && identifier) localStorage.setItem(REMEMBER_KEY, identifier); if (!rememberMe.checked) localStorage.removeItem(REMEMBER_KEY); }
-    function bootRememberedLogin() { const remembered = localStorage.getItem(REMEMBER_KEY); if (remembered) { loginEmail.value = remembered; rememberMe.checked = true; } }
-    function validateLogin() { clearAllStatuses(); const identifier = loginEmail.value.trim().toLowerCase(); let valid = true; if (!identifier) { setFieldError(loginEmail, 'Username or email is required.'); valid = false; } else if (!canBeLoginIdentifier(identifier)) { setFieldError(loginEmail, 'Enter a valid email address or username.'); valid = false; } if (!loginPassword.value) { setFieldError(loginPassword, 'Password is required.'); valid = false; } return valid; }
-    loginForm.addEventListener('submit', (event) => { event.preventDefault(); if (loginSubmit.disabled || !validateLogin()) return; setLoading(loginSubmit, true, 'Signing in...'); setTimeout(() => { const identifier = loginEmail.value.trim().toLowerCase(); const allowedIdentifier = [SUPER_ADMIN.email, LEGACY_ADMIN.email, 'superadmin', 'admin'].includes(identifier); const allowedPassword = [localStorage.getItem('satguruPassword') || SUPER_ADMIN.password, SUPER_ADMIN.password, LEGACY_ADMIN.password].includes(loginPassword.value); if (!allowedIdentifier || !allowedPassword) { setLoading(loginSubmit, false); setStatus($('loginStatus'), 'error', 'Invalid credentials. Check username/password and try again.'); return; } syncRememberedIdentifier(); setStatus($('loginStatus'), 'success', 'Login successful. Redirecting to dashboard...'); window.setTimeout(() => { window.location.href = 'home.html'; }, 500); }, 650); });
-    forgotForm.addEventListener('submit', (event) => { event.preventDefault(); clearAllStatuses(); const email = $('forgotEmail'); if (!email.value.trim()) return setFieldError(email, 'Work email is required.'); if (!isEmail(email.value.trim())) return setFieldError(email, 'Enter a valid work email.'); setLoading($('forgotSubmit'), true, 'Sending...'); setTimeout(() => { setLoading($('forgotSubmit'), false); forgotForm.reset(); setStatus($('forgotStatus'), 'success', 'If an account exists, password reset instructions will be sent.'); }, 600); });
-    accessForm.addEventListener('submit', (event) => { event.preventDefault(); clearAllStatuses(); let valid = true; ['fullName','workEmail','department','roleRequested'].forEach((id) => { const input = $(id); if (!input.value.trim()) { setFieldError(input, 'This field is required.'); valid = false; } }); if ($('workEmail').value.trim() && !isEmail($('workEmail').value.trim())) { setFieldError($('workEmail'), 'Enter a valid work email.'); valid = false; } if (!valid) return; setLoading($('accessSubmit'), true, 'Submitting...'); setTimeout(() => { setLoading($('accessSubmit'), false); accessForm.reset(); setStatus($('accessStatus'), 'success', 'Access request submitted. An administrator will review your request.'); }, 700); });
-    $('togglePassword').addEventListener('click', () => { const show = loginPassword.type === 'password'; loginPassword.type = show ? 'text' : 'password'; $('togglePassword').textContent = show ? 'Hide' : 'Show'; $('togglePassword').setAttribute('aria-label', show ? 'Hide password' : 'Show password'); });
-    $('forgotToggle').addEventListener('click', () => showCard('forgot'));
-    $('requestAccessToggle').addEventListener('click', () => showCard('access'));
-    document.querySelectorAll('[data-back-login]').forEach((button) => button.addEventListener('click', () => showCard('login')));
-    document.querySelectorAll('.auth-submit').forEach((button) => { button.dataset.defaultLabel = button.querySelector('.btn-label').textContent; });
-    document.querySelectorAll('input, textarea').forEach((input) => input.addEventListener('input', () => input.classList.remove('invalid')));
-    rememberMe.addEventListener('change', syncRememberedIdentifier);
-    bootRememberedLogin();
-    loginEmail.focus();
-  </script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
