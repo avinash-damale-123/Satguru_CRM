@@ -21,6 +21,8 @@
       <div class="plane-ribbon">Satguru CRM</div>
       <div class="plane-shape">✈</div>
     </div>
+    <div class="flight-path"></div>
+    <div class="runway-line"></div>
   </div>
 
   <main class="auth-shell" aria-label="Satguru CRM secure login">
@@ -92,5 +94,62 @@
     </section>
   </main>
   <script src="assets/app.js"></script>
+  <script>
+    (function(){
+      const form = document.getElementById('loginForm');
+      const email = document.getElementById('loginEmail');
+      const password = document.getElementById('loginPassword');
+      const status = document.getElementById('loginStatus');
+      const toggle = document.getElementById('togglePassword');
+      const forgot = document.getElementById('forgotToggle');
+      const request = document.getElementById('requestAccessToggle');
+      const forgotCard = document.getElementById('forgotCard');
+      const loginCard = document.getElementById('loginCard');
+
+      if (toggle) {
+        toggle.addEventListener('click', function(){
+          const isHidden = password.type === 'password';
+          password.type = isHidden ? 'text' : 'password';
+          toggle.textContent = isHidden ? 'Hide' : 'Show';
+        });
+      }
+
+      if (forgot) {
+        forgot.addEventListener('click', function(){
+          loginCard.classList.add('hidden');
+          forgotCard.classList.remove('hidden');
+        });
+      }
+
+      document.querySelectorAll('[data-back-login]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          forgotCard.classList.add('hidden');
+          loginCard.classList.remove('hidden');
+        });
+      });
+
+      if (request) {
+        request.addEventListener('click', function(){
+          alert('Access request flow will be connected with admin approval in the next phase.');
+        });
+      }
+
+      if (form) {
+        form.addEventListener('submit', function(event){
+          event.preventDefault();
+          const userValue = email.value.trim();
+          const passValue = password.value.trim();
+          if (!userValue || !passValue) {
+            status.className = 'status-box error';
+            status.textContent = 'Please enter username/email and password.';
+            return;
+          }
+          status.className = 'status-box success';
+          status.textContent = 'Login successful. Opening CRM workspace...';
+          setTimeout(function(){ window.location.href = 'home.html'; }, 350);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
